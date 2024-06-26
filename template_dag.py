@@ -12,7 +12,7 @@ def load_config(dag_folder):
 
 def create_task(dag_folder, task_name):
     def task_function(**kwargs):
-        script_path = os.path.join(dag_folder, 'scripts', task_name)
+        script_path = os.path.join(dag_folder, '<PLACEHOLDER_NAME_HERE>_scripts', task_name)
         exec(open(script_path).read())
     return task_function
 
