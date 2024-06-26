@@ -52,7 +52,7 @@ COPY . /opt/airflow/
 
 # Copy the requirements file separately
 COPY requirements.txt /opt/airflow/requirements.txt
-COPY /home/ubuntu/data_flow_tool/entry_point.sh /opt/airflow/entry_point.sh
+COPY entry_point.sh /opt/airflow/entry_point.sh
 # Switch to the airflow user
 USER airflow
 
