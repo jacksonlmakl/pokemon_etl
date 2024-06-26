@@ -1,0 +1,26 @@
+# Ignore Jupyter configuration files
+.jupyter/
+.ipython/
+.local/share/jupyter/
+.local/share/jupyter/runtime/
+
+# Ignore virtual environment
+airflow_venv/
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore log files
+*.log
+
+# Ignore temporary files
+*.swp
+*~
+
+# Ignore other unnecessary files
+Dockerfile
+.dockerignore
+README.md
+*.sh
