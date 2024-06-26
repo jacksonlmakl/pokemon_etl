@@ -10,7 +10,7 @@ cd /home/ubuntu/data_flow_tool
 
 # Define the path to the virtual environment
 VENV_DIR="/home/ubuntu/data_flow_tool/airflow_venv"
-
+chmod +x /home/ubuntu/data_flow_tool/entry_point.txt
 # Define the output file for the requirements
 OUTPUT_FILE="/home/ubuntu/data_flow_tool/requirements.txt"
 
@@ -52,7 +52,7 @@ COPY . /opt/airflow/
 
 # Copy the requirements file separately
 COPY requirements.txt /opt/airflow/requirements.txt
-
+COPY /home/ubuntu/data_flow_tool/entry_point.sh /opt/airflow/entry_point.sh
 # Switch to the airflow user
 USER airflow
 
@@ -61,8 +61,8 @@ RUN pip install --upgrade pip && \
     pip install -r /opt/airflow/requirements.txt
 
 # Ensure entry_point.sh is executable
-USER root
-RUN chmod +x /opt/airflow/entry_point.sh
+# USER root
+# RUN chmod +x /opt/airflow/entry_point.sh
 
 # Switch back to the airflow user
 USER airflow
