@@ -5,20 +5,46 @@
 # Function to stop a process by name
 stop_process() {
   PROCESS_NAME=$1
-  PID=$(ps aux | grep "$PROCESS_NAME" | grep -v grep | awk '{print $2}')
-  if [ -n "$PID" ]; then
-    echo "Stopping $PROCESS_NAME with PID $PID..."
-    kill -9 $PID
+  echo "Stopping $PROCESS_NAME..."
+  pkill -f "$PROCESS_NAME"
+  if [ $? -eq 0 ]; then
     echo "$PROCESS_NAME stopped."
   else
-    echo "$PROCESS_NAME is not running."
+    echo "$PROCESS_NAME not running."
   fi
 }
 
-# Stop the Airflow scheduler
+# Function to forcefully kill any process using a specific port
+kill_process_on_port() {
+  PORT=$1
+  echo "Killing process on port $PORT..."
+  fuser -k $PORT/tcp
+  if [ $? -eq 0 ]; then
+    echo "Process on port $PORT killed."
+  else
+    echo "No process running on port $PORT."
+  fi
+}
+
+# Stop the Airflow webserver and scheduler
+stop_process "airflow webserver"
 stop_process "airflow scheduler"
 
-# Stop the Airflow webserver
-stop_process "airflow webserver"
+# Kill any process using port 8080 (default webserver port) and 8793 (example port in error message)
+kill_process_on_port 8080
+kill_process_on_port 8793
+
+# Verify if processes are stopped
+if pgrep -f "airflow webserver" > /dev/null; then
+  echo "Failed to stop Airflow webserver."
+else
+  echo "Airflow webserver stopped."
+fi
+
+if pgrep -f "airflow scheduler" > /dev/null; then
+  echo "Failed to stop Airflow scheduler."
+else
+  echo "Airflow scheduler stopped."
+fi
 
 echo "Airflow services stopped."
