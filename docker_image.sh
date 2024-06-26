@@ -20,6 +20,12 @@ if [ ! -d "$VENV_DIR" ]; then
   exit 1
 fi
 
+# Check if entry_point.sh exists
+if [ ! -f "entry_point.sh" ]; then
+  echo "entry_point.sh does not exist in the current directory."
+  exit 1
+fi
+
 # Activate the virtual environment
 source "$VENV_DIR/bin/activate"
 
@@ -49,9 +55,6 @@ RUN mkdir -p /opt/airflow/logs /opt/airflow/dags && \
 
 # Copy everything from the current directory to the working directory in the Docker image
 COPY . /opt/airflow/
-
-# Copy the requirements file separately
-COPY requirements.txt /opt/airflow/requirements.txt
 
 # Ensure entry_point.sh is executable
 RUN chmod +x /opt/airflow/entry_point.sh
