@@ -11,22 +11,36 @@ fi
 # Get the current working directory
 CURRENT_DIR=$(pwd)
 
+# Set AIRFLOW_HOME to current directory
+export AIRFLOW_HOME="$CURRENT_DIR/airflow_home"
+
 # Create DAG folder
-mkdir -p "$CURRENT_DIR/dags/$DAG_NAME/scripts"
+mkdir -p "$AIRFLOW_HOME/dags/$DAG_NAME/scripts"
 
 # Copy template files to new DAG folder
-cp "$CURRENT_DIR/template_folder/configuration.yaml" "$CURRENT_DIR/dags/$DAG_NAME/"
-cp "$CURRENT_DIR/template_folder/requirements.txt" "$CURRENT_DIR/dags/$DAG_NAME/"
-cp "$CURRENT_DIR/template_folder/scripts/"* "$CURRENT_DIR/dags/$DAG_NAME/scripts/"
+cp "$CURRENT_DIR/template_folder/configuration.yaml" "$AIRFLOW_HOME/dags/$DAG_NAME/"
+cp "$CURRENT_DIR/template_folder/requirements.txt" "$AIRFLOW_HOME/dags/$DAG_NAME/"
+cp "$CURRENT_DIR/template_folder/scripts/"* "$AIRFLOW_HOME/dags/$DAG_NAME/scripts/"
 
 # Replace placeholder name in configuration.yaml with the DAG name
-sed -i "s/<PLACEHOLDER_NAME_HERE>/$DAG_NAME/g" "$CURRENT_DIR/dags/$DAG_NAME/configuration.yaml"
-sed -i "s/name: \".*\"/name: \"$DAG_NAME\"/" "$CURRENT_DIR/dags/$DAG_NAME/configuration.yaml"
+sed -i "s/<PLACEHOLDER_NAME_HERE>/$DAG_NAME/g" "$AIRFLOW_HOME/dags/$DAG_NAME/configuration.yaml"
+sed -i "s/name: \".*\"/name: \"$DAG_NAME\"/" "$AIRFLOW_HOME/dags/$DAG_NAME/configuration.yaml"
 
 # Copy the template DAG to the new DAG folder
-cp "$CURRENT_DIR/template_dag.py" "$CURRENT_DIR/dags/$DAG_NAME/${DAG_NAME}_dag.py"
+TEMPLATE_DAG_PATH="$AIRFLOW_HOME/dags/$DAG_NAME/${DAG_NAME}_dag.py"
+cp "$CURRENT_DIR/template_dag.py" "$TEMPLATE_DAG_PATH"
 
-echo "DAG $DAG_NAME created successfully in $CURRENT_DIR/dags/$DAG_NAME"
+echo "DAG $DAG_NAME created successfully in $AIRFLOW_HOME/dags/$DAG_NAME"
+
+# Create symbolic links in the Airflow dags folder for the DAG Python file
+LINK_PATH="$CURRENT_DIR/dags/${DAG_NAME}_dag.py"
+
+if [ -L "$LINK_PATH" ]; then
+  echo "Symbolic link for DAG $DAG_NAME already exists. Skipping creation."
+else
+  ln -s "$TEMPLATE_DAG_PATH" "$LINK_PATH"
+  echo "Symbolic link created for DAG $DAG_NAME"
+fi
 
 # Activate the DAG by setting 'is_paused' to 'False'
 source "$CURRENT_DIR/airflow_venv/bin/activate"
@@ -35,8 +49,8 @@ source "$CURRENT_DIR/airflow_venv/bin/activate"
 export SQLALCHEMY_SILENCE_UBER_WARNING=1
 
 # List the DAGs to ensure the new DAG is registered
-"$CURRENT_DIR/airflow_venv/bin/airflow" dags list
+airflow dags list
 
 # Unpause the DAG
-"$CURRENT_DIR/airflow_venv/bin/airflow" dags unpause "$DAG_NAME"
-echo "DAG $DAG_NAME activated."
+airflow dags unpause "${DAG_NAME}_dag"
+echo "DAG ${DAG_NAME}_dag activated."
