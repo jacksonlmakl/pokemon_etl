@@ -26,6 +26,9 @@ if [ ! -f "entry_point.sh" ]; then
   exit 1
 fi
 
+# Make entry_point.sh executable
+chmod +x entry_point.sh
+
 # Activate the virtual environment
 source "$VENV_DIR/bin/activate"
 
@@ -56,6 +59,8 @@ RUN mkdir -p /opt/airflow/logs /opt/airflow/dags && \
 # Copy everything from the current directory to the working directory in the Docker image
 COPY . /opt/airflow/
 
+# Ensure entry_point.sh is executable
+RUN chmod +x /opt/airflow/entry_point.sh
 
 # Switch to the airflow user
 USER airflow
