@@ -15,6 +15,9 @@ fi
 # Get the current working directory
 CURRENT_DIR=$(pwd)
 
+# Set AIRFLOW_HOME to current directory
+export AIRFLOW_HOME="$CURRENT_DIR/airflow_home"
+
 # Create a virtual environment in the current directory
 python3 -m venv "$CURRENT_DIR/airflow_venv"
 
@@ -23,9 +26,6 @@ source "$CURRENT_DIR/airflow_venv/bin/activate"
 
 # Upgrade pip
 pip install --upgrade pip
-
-# Set AIRFLOW_HOME to current directory
-export AIRFLOW_HOME="$CURRENT_DIR/airflow_home"
 
 # Create the Airflow home directory
 mkdir -p "$AIRFLOW_HOME"
@@ -36,14 +36,14 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 # Initialize the Airflow database
 airflow db init
 
-# # Create an admin user with username 'admin' and password 'admin'
-# airflow users create \
-#     --username admin \
-#     --firstname Admin \
-#     --lastname User \
-#     --role Admin \
-#     --email admin@example.com \
-#     --password admin
+# Create an admin user with username 'admin' and password 'admin'
+airflow users create \
+    --username admin \
+    --firstname Admin \
+    --lastname User \
+    --role Admin \
+    --email admin@example.com \
+    --password admin
 
 # Create the dags folder in the current directory
 mkdir -p "$AIRFLOW_HOME/dags"
@@ -53,10 +53,6 @@ sed -i "s|dags_folder = .*|dags_folder = $AIRFLOW_HOME/dags|" "$AIRFLOW_HOME/air
 sed -i "s|base_log_folder = .*|base_log_folder = $AIRFLOW_HOME/logs|" "$AIRFLOW_HOME/airflow.cfg"
 sed -i "s|sql_alchemy_conn = .*|sql_alchemy_conn = sqlite:///$AIRFLOW_HOME/airflow.db|" "$AIRFLOW_HOME/airflow.cfg"
 
-airflow users create --username admin --firstname Admin --lastname User --role Admin --email admin@example.com --password admin
-
-
 echo "Airflow installation completed. Admin user created with username 'admin' and password 'admin'."
 echo "Airflow home directory is set to $AIRFLOW_HOME"
 echo "Remember to activate your virtual environment with 'source $CURRENT_DIR/airflow_venv/bin/activate' before using Airflow."
-

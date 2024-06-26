@@ -27,20 +27,9 @@ sed -i "s/<PLACEHOLDER_NAME_HERE>/$DAG_NAME/g" "$AIRFLOW_HOME/dags/$DAG_NAME/con
 sed -i "s/name: \".*\"/name: \"$DAG_NAME\"/" "$AIRFLOW_HOME/dags/$DAG_NAME/configuration.yaml"
 
 # Copy the template DAG to the new DAG folder
-TEMPLATE_DAG_PATH="$AIRFLOW_HOME/dags/$DAG_NAME/${DAG_NAME}_dag.py"
-cp "$CURRENT_DIR/template_dag.py" "$TEMPLATE_DAG_PATH"
+cp "$CURRENT_DIR/template_dag.py" "$AIRFLOW_HOME/dags/$DAG_NAME/${DAG_NAME}_dag.py"
 
 echo "DAG $DAG_NAME created successfully in $AIRFLOW_HOME/dags/$DAG_NAME"
-
-# Create symbolic links in the Airflow dags folder for the DAG Python file
-LINK_PATH="$CURRENT_DIR/dags/${DAG_NAME}_dag.py"
-
-if [ -L "$LINK_PATH" ]; then
-  echo "Symbolic link for DAG $DAG_NAME already exists. Skipping creation."
-else
-  ln -s "$TEMPLATE_DAG_PATH" "$LINK_PATH"
-  echo "Symbolic link created for DAG $DAG_NAME"
-fi
 
 # Activate the DAG by setting 'is_paused' to 'False'
 source "$CURRENT_DIR/airflow_venv/bin/activate"
@@ -52,5 +41,5 @@ export SQLALCHEMY_SILENCE_UBER_WARNING=1
 airflow dags list
 
 # Unpause the DAG
-airflow dags unpause "${DAG_NAME}_dag"
-echo "DAG ${DAG_NAME}_dag activated."
+airflow dags unpause "$DAG_NAME"
+echo "DAG $DAG_NAME activated."

@@ -1,4 +1,5 @@
-source airflow_venv/bin/activate
+CURRENT_DIR=$(pwd)
+source $CURRENT_DIR/airflow_venv/bin/activate
 # Restart scheduler
 airflow scheduler  &
 
