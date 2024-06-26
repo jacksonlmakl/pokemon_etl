@@ -6,7 +6,7 @@ import yaml
 import os
 
 def load_config(dag_folder):
-    config_file = os.path.join(dag_folder, 'configuration.yaml')
+    config_file = os.path.join(dag_folder, f'<PLACEHOLDER_NAME_HERE>_configuration.yaml')
     with open(config_file, 'r') as file:
         return yaml.safe_load(file)
 
