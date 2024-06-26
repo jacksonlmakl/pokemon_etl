@@ -10,7 +10,7 @@ cd /home/ubuntu/data_flow_tool
 
 # Define the path to the virtual environment
 VENV_DIR="/home/ubuntu/data_flow_tool/airflow_venv"
-chmod +x /home/ubuntu/data_flow_tool/entry_point.txt
+chmod +x /home/ubuntu/data_flow_tool/entry_point.sh
 # Define the output file for the requirements
 OUTPUT_FILE="/home/ubuntu/data_flow_tool/requirements.txt"
 
