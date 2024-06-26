@@ -45,7 +45,7 @@ airflow users create \
     --email admin@example.com \
     --password admin
 
-# Create the dags folder in the current directory
+# Create the dags folder in the AIRFLOW_HOME directory
 mkdir -p "$AIRFLOW_HOME/dags"
 
 # Update airflow.cfg to set the dags folder and other paths

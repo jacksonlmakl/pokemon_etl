@@ -1,7 +1,22 @@
-CURRENT_DIR=$(pwd)
-source $CURRENT_DIR/airflow_venv/bin/activate
-# Restart scheduler
-airflow scheduler  &
+#!/bin/bash
 
-# Restart webserver
-airflow webserver -p 8080  &
+# airflow_start.sh
+
+# Get the current working directory
+CURRENT_DIR=$(pwd)
+
+# Set AIRFLOW_HOME to current directory
+export AIRFLOW_HOME="$CURRENT_DIR/airflow_home"
+
+# Activate the virtual environment
+source "$CURRENT_DIR/airflow_venv/bin/activate"
+
+# Start the Airflow webserver
+echo "Starting Airflow webserver..."
+airflow webserver -p 8080 &
+
+# Start the Airflow scheduler
+echo "Starting Airflow scheduler..."
+airflow scheduler &
+
+echo "Airflow webserver and scheduler started."

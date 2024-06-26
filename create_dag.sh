@@ -14,22 +14,27 @@ CURRENT_DIR=$(pwd)
 # Set AIRFLOW_HOME to current directory
 export AIRFLOW_HOME="$CURRENT_DIR/airflow_home"
 
-# Create DAG folder
-mkdir -p "$AIRFLOW_HOME/dags/$DAG_NAME/scripts"
+# Create external DAGs folder if it doesn't exist
+EXTERNAL_DAGS_DIR="$CURRENT_DIR/dags"
+mkdir -p "$EXTERNAL_DAGS_DIR/$DAG_NAME/scripts"
 
-# Copy template files to new DAG folder
-cp "$CURRENT_DIR/template_folder/configuration.yaml" "$AIRFLOW_HOME/dags/$DAG_NAME/"
-cp "$CURRENT_DIR/template_folder/requirements.txt" "$AIRFLOW_HOME/dags/$DAG_NAME/"
-cp "$CURRENT_DIR/template_folder/scripts/"* "$AIRFLOW_HOME/dags/$DAG_NAME/scripts/"
+# Copy template files to new DAG folder in the external dags directory
+cp "$CURRENT_DIR/template_folder/configuration.yaml" "$EXTERNAL_DAGS_DIR/$DAG_NAME/"
+cp "$CURRENT_DIR/template_folder/requirements.txt" "$EXTERNAL_DAGS_DIR/$DAG_NAME/"
+cp "$CURRENT_DIR/template_folder/scripts/"* "$EXTERNAL_DAGS_DIR/$DAG_NAME/scripts/"
 
 # Replace placeholder name in configuration.yaml with the DAG name
-sed -i "s/<PLACEHOLDER_NAME_HERE>/$DAG_NAME/g" "$AIRFLOW_HOME/dags/$DAG_NAME/configuration.yaml"
-sed -i "s/name: \".*\"/name: \"$DAG_NAME\"/" "$AIRFLOW_HOME/dags/$DAG_NAME/configuration.yaml"
+sed -i "s/<PLACEHOLDER_NAME_HERE>/$DAG_NAME/g" "$EXTERNAL_DAGS_DIR/$DAG_NAME/configuration.yaml"
+sed -i "s/name: \".*\"/name: \"$DAG_NAME\"/" "$EXTERNAL_DAGS_DIR/$DAG_NAME/configuration.yaml"
 
-# Copy the template DAG to the new DAG folder
-cp "$CURRENT_DIR/template_dag.py" "$AIRFLOW_HOME/dags/$DAG_NAME/${DAG_NAME}_dag.py"
+# Copy the template DAG to the external DAG folder
+cp "$CURRENT_DIR/template_dag.py" "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dag.py"
 
-echo "DAG $DAG_NAME created successfully in $AIRFLOW_HOME/dags/$DAG_NAME"
+# Create a symbolic link in the AIRFLOW_HOME/dags directory
+ln -s "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dag.py" "$AIRFLOW_HOME/dags/${DAG_NAME}_dag.py"
+
+echo "DAG $DAG_NAME created successfully in $EXTERNAL_DAGS_DIR/$DAG_NAME"
+echo "Symbolic link created in $AIRFLOW_HOME/dags/${DAG_NAME}_dag.py"
 
 # Activate the DAG by setting 'is_paused' to 'False'
 source "$CURRENT_DIR/airflow_venv/bin/activate"
