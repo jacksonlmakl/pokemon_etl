@@ -56,8 +56,6 @@ RUN mkdir -p /opt/airflow/logs /opt/airflow/dags && \
 # Copy everything from the current directory to the working directory in the Docker image
 COPY . /opt/airflow/
 
-# Ensure entry_point.sh is executable
-RUN chmod +x /opt/airflow/entry_point.sh
 
 # Switch to the airflow user
 USER airflow
