@@ -20,3 +20,5 @@ echo "Starting Airflow scheduler..."
 airflow scheduler &
 
 echo "Airflow webserver and scheduler started."
+
+wait
