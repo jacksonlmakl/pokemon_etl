@@ -28,7 +28,7 @@ sed -i "s/<PLACEHOLDER_NAME_HERE>/$DAG_NAME/g" "$EXTERNAL_DAGS_DIR/$DAG_NAME/${D
 sed -i "s/name: \".*\"/name: \"$DAG_NAME\"/" "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_configuration.yaml"
 
 # Copy the template DAG to the external DAG folder
-cp "$CURRENT_DIR/template_dag.py" "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dag.py"
+cp "$CURRENT_DIR/template_folder/template_dag.py" "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dag.py"
 
 sed -i "s/<PLACEHOLDER_NAME_HERE>/$DAG_NAME/g" "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dag.py"
 
