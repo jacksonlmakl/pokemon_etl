@@ -1,4 +1,6 @@
 # #!/bin/bash
+
+# docker_image.sh
 IMAGE_NAME="my_airflow_image"
 IMAGE_VERSION="latest"
 CONTAINER_NAME="airflow_container"
@@ -79,44 +81,4 @@ sudo docker build -t $IMAGE_NAME:$IMAGE_VERSION .
 
 # Stop and remove any existing container with the same name
 sudo docker rm -f $CONTAINER_NAME || true
-
-# Run the Docker container
-# sudo docker run -d --name $CONTAINER_NAME -p 8080:8080 $IMAGE_NAME:$IMAGE_VERSION
-
-# Display logs
-# sudo docker logs -f $CONTAINER_NAME
-
-
-
-
-
-
-
-
-# RUN chmod +x /opt/airflow/entry_point.sh
-
-# # Switch to the airflow user
-# USER airflow
-
-# # Install dependencies directly as the airflow user
-# RUN pip install --upgrade pip && \
-#     pip install -r /opt/airflow/requirements.txt
-
-# # Set the working directory
-# WORKDIR /opt/airflow
-
-# # Set the entrypoint
-# ENTRYPOINT ["/opt/airflow/entry_point.sh"]
-# EOF
-
-# # Build the Docker image
-# sudo docker build -t $IMAGE_NAME:$IMAGE_VERSION .
-
-# # Stop and remove any existing container with the same name
-# sudo docker rm -f $CONTAINER_NAME || true
-
-# # Run the Docker container
-# sudo docker run -d --name $CONTAINER_NAME -p 8080:8080 $IMAGE_NAME:$IMAGE_VERSION
-
-# # Display logs
-# sudo docker logs -f $CONTAINER_NAME
+exit 0
