@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the path to the virtual environment
-VENV_DIR="/home/ubuntu/data_flow_tool/airflow_venv"
+VENV_DIR="airflow_venv"
 
 # Check if the virtual environment directory exists
 if [ ! -d "$VENV_DIR" ]; then
