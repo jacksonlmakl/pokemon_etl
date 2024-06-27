@@ -13,7 +13,7 @@ source "$CURRENT_DIR/airflow_venv/bin/activate"
 
 # Start the Airflow webserver
 echo "Starting Airflow webserver..."
-airflow webserver -p 8081 &
+airflow webserver -p 8082 &
 
 # Start the Airflow scheduler
 echo "Starting Airflow scheduler..."
