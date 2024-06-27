@@ -20,7 +20,7 @@
         <form method="POST" action="/run_script">
             <div class="form-group">
                 <h2>Development</h2>
-                <label for="dag_name">DAG Name (for Create DAG)</label>
+                <label for="dag_name">Create A New Managed Workflow</label>
                 <input type="text" class="form-control" id="dag_name" name="dag_name" placeholder="Enter DAG Name">
             </div>
             <div class="form-group">
@@ -31,9 +31,9 @@
                 <button type="submit" name="script" value="airflow_stop" class="btn btn-warning">Stop Dev</button>
                 <br></br>
 
-                <h2>Docker Deployments</h2>
+                <h2>Deployments</h2>
                 <label style="display:block" >Manage Current Deployment</label>
-                <button type="submit" name="script" value="docker_image" class="btn btn-primary">Build Docker Image</button>
+                <button type="submit" name="script" value="docker_image" class="btn btn-primary">Build Container</button>
 
                 <button type="submit" name="script" value="docker_start" class="btn btn-success">Start Container</button>
                 <button type="submit" name="script" value="docker_stop" class="btn btn-warning">Stop Container</button>
@@ -47,17 +47,17 @@
                 <input type="text" class="form-control" id="container_id" name="container_id" placeholder="Enter Container ID">
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-secondary">Get Docker Logs</button>
+                <button type="submit" class="btn btn-secondary">Get Container Logs</button>
             </div>
         </form>
         <form method="GET" action="/docker_ps">
             <div class="form-group">
-                <button type="submit" class="btn btn-dark">Show Docker Containers</button>
+                <button type="submit" class="btn btn-dark">Show Currently Running Containers</button>
             </div>
         </form>
         <form method="GET" action="/docker_images">
             <div class="form-group">
-                <button type="submit" class="btn btn-dark">Show Docker Images</button>
+                <button type="submit" class="btn btn-dark">Show Container Images</button>
             </div>
         </form>
         <form method="POST" action="/docker_login">
