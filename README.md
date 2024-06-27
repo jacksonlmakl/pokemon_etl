@@ -15,3 +15,12 @@ cd data_flow_tool
 ./launch_jupyter.sh
 ```
 
+### Links
+```
+Airflow: http://<your-host-address>:8080/home
+Automation Manager: http://<your-host-address>:8081/
+Jupyter Notebook DAG Editor: http://<your-host-address>:8888
+
+```
+
+
