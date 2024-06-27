@@ -8,17 +8,20 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="mt-5">Shell Script Executor</h1>
+        <h1 class="mt-5">Automation Manager</h1>
         <form method="POST" action="/run_script">
             <div class="form-group">
                 <label for="dag_name">DAG Name (for Create DAG)</label>
                 <input type="text" class="form-control" id="dag_name" name="dag_name" placeholder="Enter DAG Name">
             </div>
             <div class="form-group">
+                <button type="submit" name="script" value="create_dag" class="btn btn-info">Create DAG</button>
+                <br></br>
+                <label>Manage Current Deployment</label>
                 <button type="submit" name="script" value="docker_image" class="btn btn-primary">Build Docker Image</button>
                 <button type="submit" name="script" value="docker_stop" class="btn btn-warning">Stop Docker</button>
                 <button type="submit" name="script" value="docker_start" class="btn btn-success">Start Docker</button>
-                <button type="submit" name="script" value="create_dag" class="btn btn-info">Create DAG</button>
+                
             </div>
         </form>
         <form method="POST" action="/docker_logs">
