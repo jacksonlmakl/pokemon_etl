@@ -6,13 +6,17 @@ IMAGE_VERSION="latest"
 CONTAINER_NAME="airflow_container"
 
 # Navigate to the data_flow_tool directory
-cd /home/ubuntu/data_flow_tool
+# cd /home/ubuntu/data_flow_tool
+cd data_flow_tool
 
 # Define the path to the virtual environment
-VENV_DIR="/home/ubuntu/data_flow_tool/airflow_venv"
+# VENV_DIR="/home/ubuntu/data_flow_tool/airflow_venv"
+
+VENV_DIR="airflow_venv"
 
 # Define the output file for the requirements
-OUTPUT_FILE="/home/ubuntu/data_flow_tool/requirements.txt"
+# OUTPUT_FILE="/home/ubuntu/data_flow_tool/requirements.txt"
+OUTPUT_FILE="requirements.txt"
 
 # Check if the virtual environment directory exists
 if [ ! -d "$VENV_DIR" ]; then
