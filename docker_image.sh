@@ -1,4 +1,4 @@
-# #!/bin/bash
+#!/bin/bash
 
 # docker_image.sh
 IMAGE_NAME="my_airflow_image"
