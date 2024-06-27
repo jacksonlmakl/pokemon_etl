@@ -17,7 +17,7 @@ airflow webserver -p 8082 &
 
 # Start the Airflow scheduler
 echo "Starting Airflow scheduler..."
-airflow scheduler 
+airflow scheduler &
 
 echo "Airflow webserver and scheduler started."
 

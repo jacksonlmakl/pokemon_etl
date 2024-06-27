@@ -10,25 +10,35 @@
     <div class="container">
         <h1 class="mt-5">Platform Dashboard</h1>
         <form>
-            <label style="display:block" >Platform Links</label>
-            <a href="http://localhost:8080" class="btn btn-primary" target="_blank">Airflow UI - Production</a>
-            <a href="http://localhost:8082" class="btn btn-primary" target="_blank">Airflow UI - Development</a>
-            <a href="http://localhost:8888" class="btn btn-secondary" target="_blank">Jupyter DAG Editor - Development</a>
+            <!-- <label style="display:block" >Platform Links</label> -->
+            <a href="http://localhost:8080" class="btn btn-link" target="_blank">Airflow UI - Production</a>
+            <a href="http://localhost:8082" class="btn btn-link" target="_blank">Airflow UI - Development</a>
+            <a href="http://localhost:8888" class="btn btn-link" target="_blank">Jupyter DAG Editor - Development</a>
 
         </form>
         <br>
         <form method="POST" action="/run_script">
             <div class="form-group">
+                <h2>Development</h2>
                 <label for="dag_name">DAG Name (for Create DAG)</label>
                 <input type="text" class="form-control" id="dag_name" name="dag_name" placeholder="Enter DAG Name">
             </div>
             <div class="form-group">
                 <button type="submit" name="script" value="create_dag" class="btn btn-info">Create DAG</button>
                 <br></br>
+                <label style="display:block" >Manage Development Server</label>
+                <button type="submit" name="script" value="airflow_developer_server_start" class="btn btn-success">Start Dev</button>
+                <button type="submit" name="script" value="airflow_stop" class="btn btn-warning">Stop Dev</button>
+                <br></br>
+
+                <h2>Docker Deployments</h2>
                 <label style="display:block" >Manage Current Deployment</label>
                 <button type="submit" name="script" value="docker_image" class="btn btn-primary">Build Docker Image</button>
-                <button type="submit" name="script" value="docker_stop" class="btn btn-warning">Stop Docker</button>
-                <button type="submit" name="script" value="docker_start" class="btn btn-success">Start Docker</button>
+
+                <button type="submit" name="script" value="docker_start" class="btn btn-success">Start Container</button>
+                <button type="submit" name="script" value="docker_stop" class="btn btn-warning">Stop Container</button>
+                
+
             </div>
         </form>
         <form method="POST" action="/docker_logs">
@@ -51,6 +61,7 @@
             </div>
         </form>
         <form method="POST" action="/docker_login">
+            <h2>Login To DockerHub</h2>
             <div class="form-group">
                 <label for="username">Docker Username:</label>
                 <input type="text" class="form-control" id="username" name="username" placeholder="Enter Docker Username">
@@ -65,12 +76,14 @@
         </form>
         <form method="POST" action="/docker_push">
             <div class="form-group">
+                <h2>Push Latest Image To DockerHub</h2>
                 <label for="image_name">Image Name (for Docker Push):</label>
                 <input type="text" class="form-control" id="image_name" name="image_name" placeholder="Enter Image Name">
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-success">Push Docker Image</button>
             </div>
+        <h2>Dashboard Logs:</h2>
         </form>
         {% with messages = get_flashed_messages() %}
           {% if messages %}
