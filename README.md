@@ -6,9 +6,12 @@ cd data_flow_tool
 
 ./launch_app.sh &
 
-./launch_jupyter.sh 
+./launch_jupyter.sh
 ```
-
+### Airflow Development Server (Optional)
+```
+./airflow_developer_server_start.sh
+```
 ### On Instance Restart
 ```
 ./launch_app.sh &
