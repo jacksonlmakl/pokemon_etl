@@ -25,6 +25,7 @@ docker exec -it <container_id_or_name> /bin/bash
 Airflow: http://<your-host-address>:8080/home
 Automation Manager: http://<your-host-address>:8081/
 Jupyter Notebook DAG Editor: http://<your-host-address>:8888
+Airflow Test Environment: http://<your-host-address>:8082/home
 
 ```
 
