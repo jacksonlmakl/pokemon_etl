@@ -81,4 +81,5 @@ sudo docker build -t $IMAGE_NAME:$IMAGE_VERSION .
 
 # Stop and remove any existing container with the same name
 sudo docker rm -f $CONTAINER_NAME || true
+echo "Docker Image Built Successfully"
 exit 0
