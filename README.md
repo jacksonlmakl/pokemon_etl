@@ -8,3 +8,8 @@ cd data_flow_tool
 ./launch_jupyter.sh 
 
 
+###On Instance Restart
+./launch_app.sh &
+./launch_jupyter.sh
+
+
