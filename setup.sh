@@ -7,4 +7,4 @@
 ./docker_image.sh
 ./docker_stop.sh
 ./docker_start.sh 
-./launch_jupyter.sh.sh
+./launch_jupyter.sh
