@@ -10,11 +10,9 @@
     <div class="container">
         <h1 class="mt-5">Platform Dashboard</h1>
         <form>
-            <!-- <label style="display:block" >Platform Links</label> -->
             <a href="http://localhost:8080" class="btn btn-link" target="_blank">Airflow UI - Production</a>
             <a href="http://localhost:8082" class="btn btn-link" target="_blank">Airflow UI - Development</a>
             <a href="http://localhost:8888" class="btn btn-link" target="_blank">Jupyter DAG Editor - Development</a>
-
         </form>
         <br>
         <form method="POST" action="/run_script">
@@ -33,12 +31,16 @@
 
                 <h2>Deployments</h2>
                 <label style="display:block" >Manage Current Deployment</label>
+                <label for="image_name">Image Name</label>
+                <input type="text" class="form-control" id="image_name" name="image_name" placeholder="Enter Image Name">
+                <label for="image_version">Image Version</label>
+                <input type="text" class="form-control" id="image_version" name="image_version" placeholder="Enter Image Version">
+                <label for="container_name">Container Name</label>
+                <input type="text" class="form-control" id="container_name" name="container_name" placeholder="Enter Container Name">
+                <br>
                 <button type="submit" name="script" value="docker_image" class="btn btn-primary">Build Container</button>
-
                 <button type="submit" name="script" value="docker_start" class="btn btn-success">Start Container</button>
                 <button type="submit" name="script" value="docker_stop" class="btn btn-warning">Stop Container</button>
-                
-
             </div>
         </form>
         <form method="POST" action="/docker_logs">
@@ -83,8 +85,8 @@
             <div class="form-group">
                 <button type="submit" class="btn btn-success">Push Docker Image</button>
             </div>
-        <h2>Dashboard Logs:</h2>
         </form>
+        <h2>Dashboard Logs:</h2>
         {% with messages = get_flashed_messages() %}
           {% if messages %}
             <div class="alert alert-info mt-4">
