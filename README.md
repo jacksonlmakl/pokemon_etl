@@ -2,7 +2,7 @@
 ```
 git clone https://github.com/jacksonlmakl/data_flow_tool.git
 cd data_flow_tool
- ./setup.sh &
+ ./setup.sh 
 
 ./launch_app.sh &
 
@@ -22,10 +22,12 @@ docker exec -it <container_id_or_name> /bin/bash
 
 ### Links
 ```
-Airflow: http://<your-host-address>:8080/home
-Automation Manager: http://<your-host-address>:8081/
-Jupyter Notebook DAG Editor: http://<your-host-address>:8888
-Airflow Test Environment: http://<your-host-address>:8082/home
+Platform Manager: http://<your-host-address>:8081/
+
+Airflow Prod: http://<your-host-address>:8080/home
+Airflow Dev: http://<your-host-address>:8082/home
+Jupyter DAG Editor Dev: http://<your-host-address>:8888
+
 
 ```
 
