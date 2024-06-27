@@ -6,5 +6,4 @@
 ./airflow_stop.sh
 ./docker_image.sh
 ./docker_stop.sh
-./launch_jupyter.sh &
 ./docker_start.sh &
