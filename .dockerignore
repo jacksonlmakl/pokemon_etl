@@ -6,7 +6,7 @@
 
 # Ignore virtual environment
 airflow_venv/
-
+ui_env/
 # Ignore Python cache files
 __pycache__/
 *.pyc
