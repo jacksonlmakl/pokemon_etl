@@ -2,7 +2,7 @@
 source "airflow_venv/bin/activate"
 
 # Define the image name and version
-IMAGE_NAME="my_airflow_image"
+IMAGE_NAME="jacksonmakl/data_flow_tool"
 IMAGE_VERSION="latest"
 CONTAINER_NAME="airflow_container"
 

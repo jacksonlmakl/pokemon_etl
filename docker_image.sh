@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # docker_image.sh
-IMAGE_NAME="my_airflow_image"
+IMAGE_NAME="jacksonmakl/data_flow_tool"
 IMAGE_VERSION="latest"
 CONTAINER_NAME="airflow_container"
 

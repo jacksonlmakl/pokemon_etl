@@ -21,7 +21,6 @@
                 <button type="submit" name="script" value="docker_image" class="btn btn-primary">Build Docker Image</button>
                 <button type="submit" name="script" value="docker_stop" class="btn btn-warning">Stop Docker</button>
                 <button type="submit" name="script" value="docker_start" class="btn btn-success">Start Docker</button>
-                
             </div>
         </form>
         <form method="POST" action="/docker_logs">
@@ -38,41 +37,31 @@
                 <button type="submit" class="btn btn-dark">Show Docker Containers</button>
             </div>
         </form>
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <div class="alert alert-info mt-4">
-              {% for message in messages %}
-                <p>{{ message }}</p>
-              {% endfor %}
-            </div>
-          {% endif %}
-        {% endwith %}
-    </div>
-</body>
-</html>
-
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shell Script Executor</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container">
-        <h1 class="mt-5">Shell Script Executor</h1>
-        <form method="POST" action="/run_script">
+        <form method="GET" action="/docker_images">
             <div class="form-group">
-                <label for="dag_name">DAG Name (for Create DAG)</label>
-                <input type="text" class="form-control" id="dag_name" name="dag_name" placeholder="Enter DAG Name">
+                <button type="submit" class="btn btn-dark">Show Docker Images</button>
+            </div>
+        </form>
+        <form method="POST" action="/docker_login">
+            <div class="form-group">
+                <label for="username">Docker Username:</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter Docker Username">
             </div>
             <div class="form-group">
-                <button type="submit" name="script" value="docker_image" class="btn btn-primary">Build Docker Image</button>
-                <button type="submit" name="script" value="docker_stop" class="btn btn-warning">Stop Docker</button>
-                <button type="submit" name="script" value="docker_start" class="btn btn-success">Start Docker</button>
-                <button type="submit" name="script" value="create_dag" class="btn btn-info">Create DAG</button>
+                <label for="password">Docker Password:</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Docker Password">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Login to Docker</button>
+            </div>
+        </form>
+        <form method="POST" action="/docker_push">
+            <div class="form-group">
+                <label for="image_name">Image Name (for Docker Push):</label>
+                <input type="text" class="form-control" id="image_name" name="image_name" placeholder="Enter Image Name">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Push Docker Image</button>
             </div>
         </form>
         {% with messages = get_flashed_messages() %}
@@ -86,4 +75,4 @@
         {% endwith %}
     </div>
 </body>
-</html> -->
+</html>
