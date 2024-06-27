@@ -11,7 +11,7 @@ ui_env/
 __pycache__/
 *.pyc
 *.pyo
-
+flask_app.log
 # Ignore log files
 
 

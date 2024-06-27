@@ -6,5 +6,5 @@
 ./airflow_stop.sh
 ./docker_image.sh
 ./docker_stop.sh
-./docker_start.sh 
-./docker_stop.sh
+# ./docker_start.sh 
+# ./docker_stop.sh

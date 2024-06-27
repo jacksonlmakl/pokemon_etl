@@ -9,3 +9,7 @@
  * Debugger is active!
  * Debugger PIN: 117-080-782
 127.0.0.1 - - [26/Jun/2024 23:38:37] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/jackson.makl@dataiku.com/Documents/rsaf/data_flow_tool/app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 117-080-782

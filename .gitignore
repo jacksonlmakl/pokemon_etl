@@ -7,3 +7,4 @@ hello_world2.txt
 Dockerfile
 /ui_env
 requirements.txt
+flask_app.log
