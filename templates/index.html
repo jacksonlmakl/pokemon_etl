@@ -9,9 +9,14 @@
 <body>
     <div class="container">
         <h1 class="mt-5">Automation Manager</h1>
-        <a href="http://localhost:8080" class="btn btn-primary" target="_blank">Airflow UI - Production</a>
-        <a href="http://localhost:8081" class="btn btn-primary" target="_blank">Airflow UI - Development</a>
-        <a href="http://localhost:8888" class="btn btn-secondary" target="_blank">Jupyter DAG Editor - Development</a>
+        <form>
+            <label style="display:block" >Platform Links</label>
+            <a href="http://localhost:8080" class="btn btn-primary" target="_blank">Airflow UI - Production</a>
+            <a href="http://localhost:8081" class="btn btn-primary" target="_blank">Airflow UI - Development</a>
+            <a href="http://localhost:8888" class="btn btn-secondary" target="_blank">Jupyter DAG Editor - Development</a>
+
+        </form>
+        <br>
         <form method="POST" action="/run_script">
             <div class="form-group">
                 <label for="dag_name">DAG Name (for Create DAG)</label>
@@ -20,7 +25,7 @@
             <div class="form-group">
                 <button type="submit" name="script" value="create_dag" class="btn btn-info">Create DAG</button>
                 <br></br>
-                <label>Manage Current Deployment</label>
+                <label style="display:block" >Manage Current Deployment</label>
                 <button type="submit" name="script" value="docker_image" class="btn btn-primary">Build Docker Image</button>
                 <button type="submit" name="script" value="docker_stop" class="btn btn-warning">Stop Docker</button>
                 <button type="submit" name="script" value="docker_start" class="btn btn-success">Start Docker</button>
