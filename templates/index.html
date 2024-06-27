@@ -26,7 +26,7 @@
                 <br></br>
                 <label style="display:block" >Manage Development Server</label>
                 <button type="submit" name="script" value="airflow_developer_server_start" class="btn btn-success">Start Dev</button>
-                <button type="submit" name="script" value="airflow_stop" class="btn btn-warning">Stop Dev</button>
+                <button type="submit" name="script" value="airflow_stop" class="btn btn-danger">Stop Dev</button>
                 <br></br>
 
                 <h2>Deployments</h2>
@@ -38,15 +38,20 @@
                 <label for="container_name">Container Name</label>
                 <input type="text" class="form-control" id="container_name" name="container_name" placeholder="Enter Container Name">
                 <br>
-                <button type="submit" name="script" value="docker_image" class="btn btn-primary">Build Container</button>
+                <button type="submit" name="script" value="docker_image" class="btn btn-primary">Build Container Image</button>
+                <br>
+                <br>
+                <label for="container_id">Container ID (for Docker Logs)</label>
+                <br>
+                <input type="text" class="form-control" id="container_id" name="container_id" placeholder="Enter Container ID">
+                <br>
                 <button type="submit" name="script" value="docker_start" class="btn btn-success">Start Container</button>
-                <button type="submit" name="script" value="docker_stop" class="btn btn-warning">Stop Container</button>
+                <button type="submit" name="script" value="docker_stop" class="btn btn-danger">Stop Container</button>
             </div>
         </form>
         <form method="POST" action="/docker_logs">
             <div class="form-group">
-                <label for="container_id">Container ID (for Docker Logs)</label>
-                <input type="text" class="form-control" id="container_id" name="container_id" placeholder="Enter Container ID">
+
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-secondary">Get Container Logs</button>
@@ -54,6 +59,7 @@
         </form>
         <form method="GET" action="/docker_ps">
             <div class="form-group">
+                <br></br>
                 <button type="submit" class="btn btn-dark">Show Currently Running Containers</button>
             </div>
         </form>

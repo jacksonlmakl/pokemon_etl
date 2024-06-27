@@ -3,7 +3,7 @@
 .ipython/
 .local/share/jupyter/
 .local/share/jupyter/runtime/
-
+*.ipynb
 # Ignore virtual environment
 airflow_venv/
 ui_env/
