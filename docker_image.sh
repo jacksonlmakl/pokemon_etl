@@ -81,10 +81,17 @@ sudo docker build -t $IMAGE_NAME:$IMAGE_VERSION .
 sudo docker rm -f $CONTAINER_NAME || true
 
 # Run the Docker container
-sudo docker run -d --name $CONTAINER_NAME -p 8080:8080 $IMAGE_NAME:$IMAGE_VERSION
+# sudo docker run -d --name $CONTAINER_NAME -p 8080:8080 $IMAGE_NAME:$IMAGE_VERSION
 
 # Display logs
-sudo docker logs -f $CONTAINER_NAME
+# sudo docker logs -f $CONTAINER_NAME
+
+
+
+
+
+
+
 
 # RUN chmod +x /opt/airflow/entry_point.sh
 
