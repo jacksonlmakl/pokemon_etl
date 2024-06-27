@@ -7,4 +7,4 @@ IMAGE_VERSION="latest"
 CONTAINER_NAME="airflow_container"
 
 # Run the Docker container
-sudo docker run -d --name $CONTAINER_NAME -p 8080:8080 $IMAGE_NAME:$IMAGE_VERSION
+sudo docker run -d --name $CONTAINER_NAME -p 443:8080 $IMAGE_NAME:$IMAGE_VERSION
