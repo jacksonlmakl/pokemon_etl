@@ -11,4 +11,4 @@ echo "c.NotebookApp.token = ''" >> ~/.jupyter/jupyter_notebook_config.py
 echo "c.NotebookApp.password = ''" >> ~/.jupyter/jupyter_notebook_config.py
 
 # Launch Jupyter Notebook in the specified directory and port
-jupyter notebook --notebook-dir=/home/ubuntu/data_flow_tool/dags --port=8888 --ip=0.0.0.0 --allow-root --no-browser
+jupyter notebook --notebook-dir=/home/ubuntu/data_flow_tool/dags --port=8888 --ip=0.0.0.0 --allow-root --no-browser &
