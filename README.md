@@ -14,6 +14,11 @@ cd data_flow_tool
 ./launch_app.sh &
 ./launch_jupyter.sh
 ```
+You can always use this command to see into a containers file system:
+
+```
+docker exec -it <container_id_or_name> /bin/bash
+```
 
 ### Links
 ```
