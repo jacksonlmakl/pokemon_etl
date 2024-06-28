@@ -1,11 +1,5 @@
 #!/bin/bash
-
-# Get the current working directory
-CURRENT_DIR=$(pwd)
-
-# Activate the Airflow virtual environment
-source "$CURRENT_DIR/airflow_venv/bin/activate"
-
+source airflow_venv/bin/activate
 # Check if DBT is already installed
 if ! command -v dbt &> /dev/null
 then
