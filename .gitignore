@@ -5,5 +5,5 @@ flask_app.log
 .gitignore
 .git
 git status --ignored
-**/.secrets
+**/secrets.yaml
 
