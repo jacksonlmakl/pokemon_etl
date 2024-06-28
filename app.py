@@ -20,10 +20,15 @@ def run_script():
     if script == 'create_dag' and not dag_name:
         flash('DAG Name is required for creating DAG.')
         return redirect(url_for('index'))
+    if script == 'create_dbt_dag' and not dag_name:
+        flash('DAG Name is required for creating DAG.')
+        return redirect(url_for('index'))
 
     try:
         if script == 'create_dag':
             command = ['./create_dag.sh', dag_name]
+        if script == 'create_dbt_dag':
+            command = ['./create_dbt_dag.sh', dag_name]
         elif script == 'docker_image':
             command = ['./docker_image.sh', image_name, image_version, container_name]
         elif script == 'docker_start':
