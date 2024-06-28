@@ -22,15 +22,16 @@
                 <input type="text" class="form-control" id="dag_name" name="dag_name" placeholder="Enter DAG Name">
             </div>
             <div class="form-group">
-                <button type="submit" name="script" value="create_dag" class="btn btn-info">Create DAG</button>
+                <button type="submit" name="script" value="create_dag" class="btn btn-info">Create Python DAG</button>
+                <button type="submit" name="script" value="create_dbt_dag" class="btn btn-info">Create DBT DAG</button>
                 <br></br>
-                <label style="display:block" >Manage Development Server</label>
+                <label style="display:block">Manage Development Server</label>
                 <button type="submit" name="script" value="airflow_developer_server_start" class="btn btn-success">Start Dev</button>
                 <button type="submit" name="script" value="airflow_stop" class="btn btn-danger">Stop Dev</button>
                 <br></br>
 
                 <h2>Deployments</h2>
-                <label style="display:block" >Manage Current Deployment</label>
+                <label style="display:block">Manage Current Deployment</label>
                 <label for="image_name">Image Name</label>
                 <input type="text" class="form-control" id="image_name" name="image_name" placeholder="Enter Image Name">
                 <label for="image_version">Image Version</label>
