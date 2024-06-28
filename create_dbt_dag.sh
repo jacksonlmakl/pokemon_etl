@@ -53,9 +53,15 @@ sed -i "s/<PLACEHOLDER_NAME_HERE>/$DAG_NAME/g" "$DBT_PROJECT_DIR/dbt_project.yml
 cp "$CURRENT_DIR/template_dbt/template_dbt_dag.py" "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dag.py"
 
 sed -i "s/<PLACEHOLDER_NAME_HERE>/$DAG_NAME/g" "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dag.py"
-
 # Create a symbolic link in the AIRFLOW_HOME/dags directory
 ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dag.py" "$AIRFLOW_HOME/dags/${DAG_NAME}_dag.py"
+
+
+
+cp "$EXTERNAL_DAGS_DIR/$DAG_NAME" "$AIRFLOW_HOME/dags/${DAG_NAME}"
+# Create a symbolic link in the AIRFLOW_HOME/dags directory
+ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME" "$AIRFLOW_HOME/dags/${DAG_NAME}"
+
 
 echo "DBT DAG $DAG_NAME created successfully in $EXTERNAL_DAGS_DIR/$DAG_NAME"
 echo "Symbolic link created in $AIRFLOW_HOME/dags/${DAG_NAME}_dag.py"
