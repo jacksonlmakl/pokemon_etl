@@ -4,6 +4,7 @@ requirements.txt
 flask_app.log
 .gitignore
 .git
-git status --ignored
 **/secrets.yaml
+# Except for the one in template_folder/scripts
+!template_folder/scripts/secrets.yaml
 
