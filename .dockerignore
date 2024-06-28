@@ -13,7 +13,7 @@ __pycache__/
 *.pyo
 flask_app.log
 # Ignore log files
-
+*-checkpoint.py
 
 # Ignore temporary files
 *.swp

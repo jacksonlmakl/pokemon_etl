@@ -139,6 +139,24 @@ def github_push():
     
     return redirect(url_for('index'))
 
+@app.route('/github_pull', methods=['POST'])
+def github_pull():
+    branch_name = request.form['branch_name']
+    try:
+        # Ensure git user configuration is set
+        subprocess.run(['git', 'config', '--global', 'user.email', 'you@example.com'], check=True)
+        subprocess.run(['git', 'config', '--global', 'user.name', 'Your Name'], check=True)
+        
+        # Pull from the remote repository
+        result = subprocess.run(['git', 'pull', 'origin', branch_name], capture_output=True, text=True)
+        
+        flash(result.stdout)
+        if result.stderr:
+            flash(result.stderr)
+    except subprocess.CalledProcessError as e:
+        flash(f"An error occurred: {e}")
+    
+    return redirect(url_for('index'))
 
 @app.route('/create_ssh_key', methods=['POST'])
 def create_ssh_key():

@@ -10,9 +10,9 @@
     <div class="container">
         <h1 class="mt-5">Platform Dashboard</h1>
         <form>
-            <a href="http://localhost:8080" class="btn btn-link" target="_blank">Airflow UI - Production</a>
-            <a href="http://localhost:8082" class="btn btn-link" target="_blank">Airflow UI - Development</a>
-            <a href="http://localhost:8888" class="btn btn-link" target="_blank">Jupyter DAG Editor - Development</a>
+            <a href="http://34.27.186.24:8080" class="btn btn-link" target="_blank">Airflow UI - Production</a>
+            <a href="http://34.27.186.24:8082" class="btn btn-link" target="_blank">Airflow UI - Development</a>
+            <a href="http://34.27.186.24:8888" class="btn btn-link" target="_blank">Jupyter DAG Editor - Development</a>
         </form>
         <br>
         <form method="POST" action="/run_script">
@@ -101,6 +101,16 @@
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Push to GitHub</button>
+            </div>
+        </form>
+        <form method="POST" action="/github_pull">
+            <h2>Pull from GitHub</h2>
+            <div class="form-group">
+                <label for="branch_name">Branch Name:</label>
+                <input type="text" class="form-control" id="branch_name" name="branch_name" placeholder="Enter Branch Name">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-secondary">Pull from Git Origin</button>
             </div>
         </form>
         <form method="POST" action="/create_ssh_key">
