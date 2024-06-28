@@ -118,8 +118,12 @@ def github_push():
         # Initialize git repository if not already initialized
         subprocess.run(['git', 'init'], check=True)
         
-        # Add remote origin if not already added
-#        subprocess.run(['git', 'remote', 'remove', 'origin'], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        # Check if remote origin already exists
+        result = subprocess.run(['git', 'remote'], capture_output=True, text=True)
+        if 'origin' in result.stdout:
+            subprocess.run(['git', 'remote', 'remove', 'origin'], check=True)
+        
+        # Add remote origin
         subprocess.run(['git', 'remote', 'add', 'origin', repo_url], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         
         # Add files, commit, and push to GitHub
@@ -134,6 +138,7 @@ def github_push():
         flash(f"An error occurred: {e}")
     
     return redirect(url_for('index'))
+
 
 @app.route('/create_ssh_key', methods=['POST'])
 def create_ssh_key():
