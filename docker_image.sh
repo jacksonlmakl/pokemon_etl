@@ -31,6 +31,12 @@ chmod +x entry_point.sh
 # Activate the virtual environment
 source "$VENV_DIR/bin/activate"
 
+# Find every requirements.txt file in the dags directory and its subdirectories
+find dags -name 'requirements.txt' | while read requirements_file; do
+    echo "Installing packages from $requirements_file"
+    pip install -r "$requirements_file"
+done
+
 # Generate the requirements.txt file
 pip freeze > "$OUTPUT_FILE"
 
