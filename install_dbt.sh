@@ -1,7 +1,7 @@
 #!/bin/bash
 source airflow_venv/bin/activate
 # Check if DBT is already installed
-if ! command -v dbt &> /dev/null
+if ! command -v sudo dbt &> /dev/null
 then
     echo "DBT not found, installing DBT..."
     
@@ -10,10 +10,10 @@ then
     sudo apt-get install -y python3-pip
     
     # Install DBT
-    pip3 install dbt
+    sudo pip3 install dbt
 
     # Verify DBT installation
-    if command -v dbt &> /dev/null
+    if sudo command -v dbt &> /dev/null
     then
         echo "DBT installed successfully."
     else
@@ -28,7 +28,7 @@ fi
 pip3 install dbt-snowflake
 
 # Verify the installation of DBT Snowflake adapter
-if dbt --version | grep -q "dbt-snowflake"
+if sudo dbt --version | grep -q "dbt-snowflake"
 then
     echo "DBT Snowflake adapter installed successfully."
 else
