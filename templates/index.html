@@ -41,15 +41,11 @@
                 <button type="submit" name="script" value="docker_image" class="btn btn-primary">Build Container Image</button>
                 <br>
                 <br>
-
                 <button type="submit" name="script" value="docker_start" class="btn btn-success">Start Container</button>
                 <button type="submit" name="script" value="docker_stop" class="btn btn-danger">Stop Container</button>
             </div>
         </form>
         <form method="POST" action="/docker_logs">
-            <div class="form-group">
-
-            </div>
             <div class="form-group">
                 <label for="container_id">Container ID (for Docker Logs)</label>
                 <br>
@@ -91,6 +87,35 @@
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-success">Push Docker Image</button>
+            </div>
+        </form>
+        <form method="POST" action="/github_push">
+            <h2>Push to GitHub</h2>
+            <div class="form-group">
+                <label for="repo_url">GitHub Repository URL:</label>
+                <input type="text" class="form-control" id="repo_url" name="repo_url" placeholder="Enter Repository URL">
+            </div>
+            <div class="form-group">
+                <label for="branch_name">Branch Name:</label>
+                <input type="text" class="form-control" id="branch_name" name="branch_name" placeholder="Enter Branch Name">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Push to GitHub</button>
+            </div>
+        </form>
+        <form method="POST" action="/create_ssh_key">
+            <h2>SSH Key Management</h2>
+            <div class="form-group">
+                <label for="ssh_key_email">Email for SSH Key:</label>
+                <input type="text" class="form-control" id="ssh_key_email" name="ssh_key_email" placeholder="Enter Email">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Create SSH Key</button>
+            </div>
+        </form>
+        <form method="GET" action="/view_ssh_key">
+            <div class="form-group">
+                <button type="submit" class="btn btn-info">View SSH Key</button>
             </div>
         </form>
         <h2>Dashboard Logs:</h2>

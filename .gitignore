@@ -8,3 +8,5 @@ Dockerfile
 /ui_env
 requirements.txt
 flask_app.log
+.gitignore
+.git

@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import subprocess
+import os
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
@@ -104,6 +105,75 @@ def docker_push():
         output = str(e)
         
     return render_template('output.html', output=output)
+
+@app.route('/github_push', methods=['POST'])
+def github_push():
+    repo_url = request.form['repo_url']
+    branch_name = request.form['branch_name']
+    try:
+        # Ensure git user configuration is set
+        subprocess.run(['git', 'config', '--global', 'user.email', 'you@example.com'], check=True)
+        subprocess.run(['git', 'config', '--global', 'user.name', 'Your Name'], check=True)
+        
+        # Initialize git repository if not already initialized
+        subprocess.run(['git', 'init'], check=True)
+        
+        # Add remote origin if not already added
+#        subprocess.run(['git', 'remote', 'remove', 'origin'], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        subprocess.run(['git', 'remote', 'add', 'origin', repo_url], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        
+        # Add files, commit, and push to GitHub
+        subprocess.run(['git', 'add', '.'], check=True)
+        subprocess.run(['git', 'commit', '-m', 'Initial commit'], check=True)
+        result = subprocess.run(['git', 'push', '--set-upstream', 'origin', branch_name], capture_output=True, text=True)
+        
+        flash(result.stdout)
+        if result.stderr:
+            flash(result.stderr)
+    except subprocess.CalledProcessError as e:
+        flash(f"An error occurred: {e}")
+    
+    return redirect(url_for('index'))
+
+@app.route('/create_ssh_key', methods=['POST'])
+def create_ssh_key():
+    ssh_key_email = request.form['ssh_key_email']
+    ssh_key_path = os.path.expanduser('~/.ssh/id_rsa')
+    
+    # Remove existing SSH key files
+    try:
+        if os.path.exists(ssh_key_path):
+            os.remove(ssh_key_path)
+            os.remove(f'{ssh_key_path}.pub')
+    except Exception as e:
+        flash(f"Error removing existing SSH key: {str(e)}")
+        return redirect(url_for('index'))
+    
+    # Create new SSH key
+    try:
+        result = subprocess.run(
+            ['ssh-keygen', '-t', 'rsa', '-b', '4096', '-C', ssh_key_email, '-f', ssh_key_path, '-N', ''],
+            capture_output=True, text=True
+        )
+        if result.stderr:
+            flash(result.stderr)
+        else:
+            flash('SSH key created successfully.')
+    except Exception as e:
+        flash(f"Error creating SSH key: {str(e)}")
+
+    return redirect(url_for('index'))
+
+@app.route('/view_ssh_key', methods=['GET'])
+def view_ssh_key():
+    try:
+        with open(os.path.expanduser('~/.ssh/id_rsa.pub'), 'r') as file:
+            ssh_key = file.read()
+        flash(ssh_key)
+    except Exception as e:
+        flash(str(e))
+    
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8081, debug=True)
