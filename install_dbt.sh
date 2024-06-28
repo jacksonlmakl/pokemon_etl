@@ -25,15 +25,15 @@ else
 fi
 
 # Install DBT adapter for Snowflake (or any other specific adapter you need)
-pip3 install dbt-snowflake
+# sudo pip3 install dbt-snowflake
 
-# Verify the installation of DBT Snowflake adapter
-if sudo dbt --version | grep -q "dbt-snowflake"
-then
-    echo "DBT Snowflake adapter installed successfully."
-else
-    echo "DBT Snowflake adapter installation failed."
-    exit 1
-fi
+# # Verify the installation of DBT Snowflake adapter
+# if sudo dbt --version | grep -q "dbt-snowflake"
+# then
+#     echo "DBT Snowflake adapter installed successfully."
+# else
+#     echo "DBT Snowflake adapter installation failed."
+#     exit 1
+# fi
 
-echo "All necessary components are installed."
+# echo "All necessary components are installed."
