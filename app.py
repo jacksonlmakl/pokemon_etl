@@ -111,6 +111,8 @@ def github_push():
     repo_url = request.form['repo_url']
     branch_name = request.form['branch_name']
     try:
+        # Run the command using subprocess
+        subprocess.run("ssh-keyscan github.com >> ~/.ssh/known_hosts", shell=True, check=True)
         # Ensure git user configuration is set
         subprocess.run(['git', 'config', '--global', 'user.email', 'you@example.com'], check=True)
         subprocess.run(['git', 'config', '--global', 'user.name', 'Your Name'], check=True)
@@ -128,7 +130,7 @@ def github_push():
         
         # Add files, commit, and push to GitHub
         subprocess.run(['git', 'add', '.'], check=True)
-        subprocess.run(['git', 'commit', '-m', 'Initial commit'], check=True)
+        subprocess.run(['git', 'commit', '-m', 'web_ui_commit'], check=True)
         result = subprocess.run(['git', 'push', '--set-upstream', 'origin', branch_name], capture_output=True, text=True)
         
         flash(result.stdout)
