@@ -24,8 +24,9 @@ else
     echo "DBT is already installed."
 fi
 
-# Install DBT adapter for Snowflake (or any other specific adapter you need)
-# sudo pip3 install dbt-snowflake
+source airflow_venv/bin/activate
+# # Install DBT adapter for Snowflake (or any other specific adapter you need)
+pip3 install dbt-snowflake
 
 # # Verify the installation of DBT Snowflake adapter
 # if sudo dbt --version | grep -q "dbt-snowflake"

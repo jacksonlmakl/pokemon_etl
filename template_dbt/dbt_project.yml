@@ -1,18 +1,22 @@
-name: '<PLACEHOLDER_NAME_HERE>'
+version: 2
+
+name: 'DBT_DAG'
 version: '1.0.0'
 profile: 'my_profile'
 
-source-paths: ["models"]
-analysis-paths: ["analyses"]
-test-paths: ["tests"]
-data-paths: ["seeds"]
-macro-paths: ["macros"]
-snapshot-paths: ["snapshots"]
-docs-paths: ["docs"]
+source-paths: ["models"]  # Directory containing source YAML files
+test-paths: ["tests"]  # Directory for test files
+data-paths: ["seeds"]  # Directory for seed files (if any)
+macro-paths: ["macros"]  # Directory for macro files
+docs-paths: ["docs"]  # Directory for documentation files
 
 models:
-  <PLACEHOLDER_NAME_HERE>:
+  DBT_DAG:
     staging:
-      +materialized: view
+      +materialized: view  # Materialization type for staging models (e.g., view)
     marts:
-      +materialized: table
+      +materialized: table  # Materialization type for mart models (e.g., table)
+
+sources:
+  pokemon:
+    +enabled: true

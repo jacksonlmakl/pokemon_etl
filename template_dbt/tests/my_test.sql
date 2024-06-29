@@ -1,1 +1,1 @@
-select count(*) from {{ ref('fct_orders') }} where order_id is null
+select count(*) from {{ ref('core_pokemon') }} where order_id is null
