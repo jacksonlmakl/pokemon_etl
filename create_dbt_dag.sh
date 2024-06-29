@@ -22,7 +22,7 @@ EXTERNAL_DAGS_DIR="$CURRENT_DIR/dags"
 mkdir -p "$EXTERNAL_DAGS_DIR/$DAG_NAME"
 
 # Create DBT project structure
-DBT_PROJECT_DIR="$EXTERNAL_DAGS_DIR/$DAG_NAME/dbt_project"
+DBT_PROJECT_DIR="$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dbt_project"
 
 mkdir -p "$DBT_PROJECT_DIR/models"
 mkdir -p "$DBT_PROJECT_DIR/models/staging"
@@ -42,7 +42,7 @@ cp "$CURRENT_DIR/template_dbt/models" "$DBT_PROJECT_DIR/models"
 # cp "$CURRENT_DIR/template_dbt/models/marts/dim_customers.sql" "$DBT_PROJECT_DIR/models/marts/dim_customers.sql"
 cp "$CURRENT_DIR/template_dbt/models/marts/core_pokemon.sql" "$DBT_PROJECT_DIR/models/marts/core_pokemon.sql"
 cp "$CURRENT_DIR/template_dbt/models/staging/stg_pokemon.sql" "$DBT_PROJECT_DIR/models/staging/stg_pokemon.sql"
-cp "$CURRENT_DIR/template_dbt/models/sources/pokemon.sql" "$DBT_PROJECT_DIR/models/sources/pokemon.sql"
+cp "$CURRENT_DIR/template_dbt/models/sources/pokemon.yml" "$DBT_PROJECT_DIR/models/sources/pokemon.yml"
 
 cp "$CURRENT_DIR/template_dbt/seeds/my_seed_data.csv" "$DBT_PROJECT_DIR/seeds/my_seed_data.csv"
 # cp "$CURRENT_DIR/template_dbt/snapshots/snapshot_orders.sql" "$DBT_PROJECT_DIR/snapshots/snapshot_orders.sql"
@@ -62,11 +62,16 @@ sed -i "s/<PLACEHOLDER_NAME_HERE>/$DAG_NAME/g" "$EXTERNAL_DAGS_DIR/$DAG_NAME/${D
 ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dag.py" "$AIRFLOW_HOME/dags/${DAG_NAME}_dag.py"
 
 
+# mkdir "$AIRFLOW_HOME/dags/${DAG_NAME}"
 
-cp "$EXTERNAL_DAGS_DIR/$DAG_NAME" "$AIRFLOW_HOME/dags/${DAG_NAME}"
+cp -r "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dbt_project" "$AIRFLOW_HOME/dags/${DAG_NAME}_dbt_project"
 # Create a symbolic link in the AIRFLOW_HOME/dags directory
-ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME" "$AIRFLOW_HOME/dags/${DAG_NAME}"
+ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dbt_project/" "$AIRFLOW_HOME/dags/${DAG_NAME}/${DAG_NAME}_dbt_project/"
+ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dbt_project/profiles.yaml" "$AIRFLOW_HOME/dags/${DAG_NAME}/${DAG_NAME}_dbt_project/profiles.yaml"
 
+
+
+rm -rf "$AIRFLOW_HOME/dags/${DAG_NAME}_dbt_project"/${DAG_NAME}_dag.py
 
 echo "DBT DAG $DAG_NAME created successfully in $EXTERNAL_DAGS_DIR/$DAG_NAME"
 echo "Symbolic link created in $AIRFLOW_HOME/dags/${DAG_NAME}_dag.py"
