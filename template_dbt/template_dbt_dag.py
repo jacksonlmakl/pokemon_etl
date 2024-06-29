@@ -6,7 +6,7 @@ import os
 import subprocess
 
 def run_dbt_project():
-    dbt_project_dir = os.path.join(os.environ["AIRFLOW_HOME"], "dags", "<PLACEHOLDER_NAME_HERE>", "dbt_project")
+    dbt_project_dir = os.path.join(os.environ["AIRFLOW_HOME"], "dags", "<PLACEHOLDER_NAME_HERE>_dbt_project")
     subprocess.run(["dbt", "run"], cwd=dbt_project_dir)
 
 default_args = {
