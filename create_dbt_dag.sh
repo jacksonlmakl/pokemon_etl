@@ -68,8 +68,14 @@ ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dag.py" "$AIRFLOW_HOME/dags/${D
 
 cp -r "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dbt_project" "$AIRFLOW_HOME/dags/${DAG_NAME}_dbt_project"
 # Create a symbolic link in the AIRFLOW_HOME/dags directory
-ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dbt_project/" "$AIRFLOW_HOME/dags/${DAG_NAME}/${DAG_NAME}_dbt_project/"
-ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dbt_project/profiles.yml" "$AIRFLOW_HOME/dags/${DAG_NAME}/${DAG_NAME}_dbt_project/profiles.yml"
+ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dbt_project/" "$AIRFLOW_HOME/dags/${DAG_NAME}_dbt_project/"
+ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dbt_project" "$AIRFLOW_HOME/dags/${DAG_NAME}_dbt_project"
+ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dbt_project/models" "$AIRFLOW_HOME/dags/${DAG_NAME}_dbt_project/models"
+ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dbt_project/models/sources" "$AIRFLOW_HOME/dags/${DAG_NAME}_dbt_project/models/sources"
+ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dbt_project/models/marts" "$AIRFLOW_HOME/dags/${DAG_NAME}_dbt_project/models/marts"
+ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dbt_project/models/staging" "$AIRFLOW_HOME/dags/${DAG_NAME}_dbt_project/models/staging"
+
+ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dbt_project/profiles.yml" "$AIRFLOW_HOME/dags/${DAG_NAME}_dbt_project/profiles.yml"
 
 
 
