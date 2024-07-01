@@ -8,7 +8,7 @@ CONTAINER_NAME=${3:-"airflow_container"}
 cd data_flow_tool
 
 # Define the path to the virtual environment
-VENV_DIR="airflow_venv"
+VENV_DIR="airflow_home/airflow_venv"
 
 # Define the output file for the requirements
 OUTPUT_FILE="requirements.txt"
@@ -77,6 +77,8 @@ RUN source /opt/airflow/airflow_venv/bin/activate
 
 # Install dependencies directly as the airflow user
 RUN pip3  install --upgrade pip && \
+    pip3 install dbt \
+    pip3 install dbt-snowflake \
     pip3  install -r /opt/airflow/requirements.txt
 USER airflow
 # Set the working directory
@@ -126,7 +128,7 @@ exit 0
 # chmod +x entry_point.sh
 
 # # Activate the virtual environment
-# source "$VENV_DIR/bin/activate"
+# sudo source "$VENV_DIR/bin/activate"
 
 # # Find every requirements.txt file in the dags directory and its subdirectories
 # find dags -name 'requirements.txt' | while read requirements_file; do
@@ -144,7 +146,7 @@ exit 0
 
 # # Remove pkg_resources from requirements.txt if present
 # sed -i "s/pkg_resources==0.0.0/ /g" $OUTPUT_FILE
-
+# sed -i "s/dbt-snowflake/ /g" "--no-cache-dir dbt-snowflake"
 # # Create a Dockerfile if it doesn't exist
 # cat <<EOF > Dockerfile
 # # Use the official Airflow image with Python 3.8
@@ -167,10 +169,15 @@ exit 0
 # # Switch to the airflow user
 # USER airflow
 
-# # Install dependencies directly as the airflow user
-# RUN pip install --upgrade pip && \
-#     pip install -r /opt/airflow/requirements.txt
+# # Install python3.8-venv if it's not installed
+# USER root
+# RUN python3 -m venv "/opt/airflow/airflow_venv"
+# RUN source /opt/airflow/airflow_venv/bin/activate
 
+# # Install dependencies directly as the airflow user
+# RUN pip3  install --upgrade pip && \
+#     pip3  install -r /opt/airflow/requirements.txt
+# USER airflow
 # # Set the working directory
 # WORKDIR /opt/airflow
 
