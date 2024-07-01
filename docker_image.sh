@@ -29,7 +29,7 @@ fi
 chmod +x entry_point.sh
 
 # Activate the virtual environment
-sudo source "$VENV_DIR/bin/activate"
+source "$VENV_DIR/bin/activate"
 
 # Find every requirements.txt file in the dags directory and its subdirectories
 find dags -name 'requirements.txt' | while read requirements_file; do
@@ -47,7 +47,7 @@ echo "Requirements have been saved to $OUTPUT_FILE"
 
 # Remove pkg_resources from requirements.txt if present
 sed -i "s/pkg_resources==0.0.0/ /g" $OUTPUT_FILE
-sed -i "s/dbt-snowflake/ /g" "--no-cache-dir dbt-snowflake"
+
 # Create a Dockerfile if it doesn't exist
 cat <<EOF > Dockerfile
 # Use the official Airflow image with Python 3.8
@@ -55,6 +55,8 @@ FROM apache/airflow:2.5.1-python3.8
 
 # Set environment variables
 ENV AIRFLOW_HOME=/opt/airflow
+ENV PIP_USER=false
+ENV HOME=/root
 
 # Create necessary directories and set permissions
 USER root
@@ -67,20 +69,20 @@ COPY . /opt/airflow/
 # Ensure entry_point.sh is executable
 RUN chmod +x /opt/airflow/entry_point.sh
 
+# Install python3-venv if it's not installed
+RUN apt-get update && apt-get install -y python3-venv
+
 # Switch to the airflow user
 USER airflow
 
-# Install python3.8-venv if it's not installed
-USER root
-RUN python3 -m venv "/opt/airflow/airflow_venv"
-RUN source /opt/airflow/airflow_venv/bin/activate
+# Create the virtual environment
+RUN python3 -m venv /opt/airflow/airflow_venv
 
-# Install dependencies directly as the airflow user
-RUN pip3  install --upgrade pip && \
-    pip3 install dbt \
-    pip3 install dbt-snowflake \
-    pip3  install -r /opt/airflow/requirements.txt
-USER airflow
+# Upgrade pip and install dependencies
+RUN /opt/airflow/airflow_venv/bin/pip install --upgrade pip
+RUN /opt/airflow/airflow_venv/bin/pip install dbt dbt-snowflake
+RUN /opt/airflow/airflow_venv/bin/pip install -r /opt/airflow/requirements.txt
+
 # Set the working directory
 WORKDIR /opt/airflow
 
@@ -93,8 +95,16 @@ sudo docker build -t $IMAGE_NAME:$IMAGE_VERSION .
 
 # Stop and remove any existing container with the same name
 sudo docker rm -f $CONTAINER_NAME || true
-echo "Docker Image Built Successfully"
+
+# Run the new container
+sudo docker run -d --name $CONTAINER_NAME $IMAGE_NAME:$IMAGE_VERSION
+
+echo "Docker Image Built and Container Started Successfully"
 exit 0
+
+
+
+
 
 
 # #!/bin/bash
