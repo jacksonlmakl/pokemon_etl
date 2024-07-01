@@ -26,7 +26,12 @@ fi
 
 source airflow_home/airflow_venv/bin/activate
 # # Install DBT adapter for Snowflake (or any other specific adapter you need)
-pip3 install dbt-snowflake
+# pip3 install dbt-snowflake
+# pip install dbt-snowflake --force-reinstall
+pip install dbt
+pip install dbt-snowflake --force-reinstall
+
+
 
 # # Verify the installation of DBT Snowflake adapter
 # if sudo dbt --version | grep -q "dbt-snowflake"
