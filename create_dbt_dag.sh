@@ -50,6 +50,8 @@ cp "$CURRENT_DIR/template_dbt/macros/my_custom_macro.sql" "$DBT_PROJECT_DIR/macr
 # cp "$CURRENT_DIR/template_dbt/analyses/my_analysis.sql" "$DBT_PROJECT_DIR/analyses/my_analysis.sql"
 cp "$CURRENT_DIR/template_dbt/tests/my_test.sql" "$DBT_PROJECT_DIR/tests/my_test.sql"
 cp "$CURRENT_DIR/template_dbt/docs/my_documentation.md" "$DBT_PROJECT_DIR/docs/my_documentation.md"
+cp "$CURRENT_DIR/template_dbt/requirements.txt" "$EXTERNAL_DAGS_DIR/$DAG_NAME/requirements.txt"
+ln "$EXTERNAL_DAGS_DIR/$DAG_NAME/requirements.txt" "$AIRFLOW_HOME/dags/requirements.txt"
 
 # Replace placeholder name in dbt_project.yml with the DAG name
 sed -i "s/<PLACEHOLDER_NAME_HERE>/$DAG_NAME/g" "$DBT_PROJECT_DIR/dbt_project.yml"
@@ -67,7 +69,7 @@ ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dag.py" "$AIRFLOW_HOME/dags/${D
 cp -r "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dbt_project" "$AIRFLOW_HOME/dags/${DAG_NAME}_dbt_project"
 # Create a symbolic link in the AIRFLOW_HOME/dags directory
 ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dbt_project/" "$AIRFLOW_HOME/dags/${DAG_NAME}/${DAG_NAME}_dbt_project/"
-ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dbt_project/profiles.yaml" "$AIRFLOW_HOME/dags/${DAG_NAME}/${DAG_NAME}_dbt_project/profiles.yaml"
+ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dbt_project/profiles.yml" "$AIRFLOW_HOME/dags/${DAG_NAME}/${DAG_NAME}_dbt_project/profiles.yml"
 
 
 

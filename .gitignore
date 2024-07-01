@@ -1,6 +1,6 @@
 /airflow_venv
 /ui_env
-requirements.txt
+# requirements.txt
 flask_app.log
 .gitignore
 .git
