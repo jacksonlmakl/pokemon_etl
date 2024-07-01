@@ -77,7 +77,8 @@ ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dbt_project/models/staging" "$A
 
 ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dbt_project/profiles.yml" "$AIRFLOW_HOME/dags/${DAG_NAME}_dbt_project/profiles.yml"
 
-
+ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dbt_project/" "$AIRFLOW_HOME/dags/${DAG_NAME}_dbt_project/"
+ln -sf "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dbt_project" "$AIRFLOW_HOME/dags/${DAG_NAME}_dbt_project"
 
 rm -rf "$AIRFLOW_HOME/dags/${DAG_NAME}_dbt_project"/${DAG_NAME}_dag.py
 
