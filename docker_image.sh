@@ -97,9 +97,9 @@ sudo docker build -t $IMAGE_NAME:$IMAGE_VERSION .
 sudo docker rm -f $CONTAINER_NAME || true
 
 # Run the new container
-sudo docker run -d --name $CONTAINER_NAME $IMAGE_NAME:$IMAGE_VERSION
+# sudo docker run -d --name $CONTAINER_NAME $IMAGE_NAME:$IMAGE_VERSION
 
-echo "Docker Image Built and Container Started Successfully"
+echo "Docker Image Built Successfully"
 exit 0
 
 
