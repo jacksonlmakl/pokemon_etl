@@ -7,6 +7,21 @@ CONTAINER_NAME=${3:-"airflow_container"}
 # Navigate to the data_flow_tool directory
 cd data_flow_tool
 
+# Define the output file
+OUTPUT_FILE="master_secrets.yaml"
+
+# Clear the output file if it exists
+> $OUTPUT_FILE
+
+# Find all secrets.yaml files in the dags directory and its subdirectories
+find dags -type f -name 'secrets.yaml' | while read -r file; do
+    # Append the contents of each secrets.yaml to the master file
+    echo "Processing $file..."
+    cat "$file" >> $OUTPUT_FILE
+    echo -e "\n---\n" >> $OUTPUT_FILE  # Optional: Add a separator between files for clarity
+done
+
+
 # Define the path to the virtual environment
 VENV_DIR="airflow_home/airflow_venv"
 
@@ -83,6 +98,9 @@ RUN tar -xzvf /opt/airflow/airflow_home.tar.gz -C /opt/airflow && rm /opt/airflo
 RUN rm -rf /opt/airflow/dags
 RUN cp -rf /opt/airflow/airflow_home/dags/ /opt/airflow/
 RUN rm -rf /opt/airflow/airflow_home
+
+COPY secrets.yaml /opt/airflow/dags/secrets.yaml
+
 # Install python3-venv if it's not installed
 USER root
 RUN apt-get update && apt-get install -y python3-venv
