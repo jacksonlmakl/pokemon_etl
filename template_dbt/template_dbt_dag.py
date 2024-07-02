@@ -4,6 +4,14 @@ from airflow.operators.python_operator import PythonOperator
 from datetime import datetime, timedelta
 import os
 import subprocess
+import yaml
+
+def load_config(dag_folder):
+    config_file = os.path.join(dag_folder, f'<PLACEHOLDER_NAME_HERE>_configuration.yaml')
+    with open(config_file, 'r') as file:
+        return yaml.safe_load(file)
+dag_folder = os.path.dirname(os.path.abspath(__file__))
+config = load_config(dag_folder)
 
 def run_dbt_project():
     dbt_project_dir = os.path.join(os.environ["AIRFLOW_HOME"], "dags", "<PLACEHOLDER_NAME_HERE>_dbt_project")
@@ -19,18 +27,18 @@ def run_dbt_project():
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': datetime(2023, 1, 1),
+    'start_date':datetime(config['start_date_year'], config['start_month_year'], config['start_day_year']),
     'email_on_failure': False,
     'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=5),
+    'retries': config['retries'],
+    'retry_delay': timedelta(minutes=config['retry_delay']),
 }
 
 dag = DAG(
     '<PLACEHOLDER_NAME_HERE>',
     default_args=default_args,
     description='A simple DBT DAG',
-    schedule_interval=timedelta(days=1),
+   schedule_interval=config['schedule_interval'],
 )
 
 start = DummyOperator(
