@@ -5,6 +5,6 @@ my_profile:
       type: snowflake
       account: ip94038.us-east4.gcp
       user: jacksongeorgetown
-      password: Dataiku0531*$
+      password: *************
       database: RAW
       schema: POKEMON
