@@ -3,6 +3,7 @@
 git clone https://github.com/jacksonlmakl/data_flow_tool.git
 cd data_flow_tool
 git remote remove origin
+sed -i "s/localhost:/<YOUR HOST IP ADDRESS HERE>:/g" "templates/index.html"
 
  ./setup.sh 
 
