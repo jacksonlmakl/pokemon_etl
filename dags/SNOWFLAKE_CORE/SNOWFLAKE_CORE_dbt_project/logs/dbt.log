@@ -1,0 +1,125 @@
+[0m17:09:03.985032 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f604b3a3c40>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6049ae3e20>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6049aae6a0>]}
+
+
+============================== 17:09:03.988957 | 090eda49-b4fc-4ceb-bb12-6d33d79ae80b ==============================
+[0m17:09:03.988957 [info ] [MainThread]: Running with dbt=1.8.3
+[0m17:09:03.989651 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'version_check': 'True', 'debug': 'False', 'log_path': '/home/jacksonlmakl/data_flow_tool/dags/SNOWFLAKE_CORE/SNOWFLAKE_CORE_dbt_project/logs', 'profiles_dir': '/home/jacksonlmakl/data_flow_tool/dags/SNOWFLAKE_CORE/SNOWFLAKE_CORE_dbt_project', 'fail_fast': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'empty': 'False', 'log_format': 'default', 'introspect': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'target_path': 'None', 'invocation_command': 'dbt run', 'send_anonymous_usage_stats': 'True'}
+[0m17:09:04.249896 [warn ] [MainThread]: [[33mWARNING[0m]: Deprecated functionality
+The `source-paths` config has been renamed to `model-paths`. Please update your
+`dbt_project.yml` configuration to reflect this change.
+[0m17:09:04.250595 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'deprecation', 'label': '090eda49-b4fc-4ceb-bb12-6d33d79ae80b', 'property_': 'warn', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f604848b790>]}
+[0m17:09:04.251187 [warn ] [MainThread]: [[33mWARNING[0m]: Deprecated functionality
+The `data-paths` config has been renamed to `seed-paths`. Please update your
+`dbt_project.yml` configuration to reflect this change.
+[0m17:09:04.251671 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'deprecation', 'label': '090eda49-b4fc-4ceb-bb12-6d33d79ae80b', 'property_': 'warn', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f604848b850>]}
+[0m17:09:04.382898 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '090eda49-b4fc-4ceb-bb12-6d33d79ae80b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f604849ed60>]}
+[0m17:09:04.455272 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '090eda49-b4fc-4ceb-bb12-6d33d79ae80b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f604842ddf0>]}
+[0m17:09:04.456399 [info ] [MainThread]: Registered adapter: snowflake=1.8.3
+[0m17:09:04.477141 [debug] [MainThread]: checksum: 30bd4080c2bc8dee5936f8f60083ffbe1c906859d0fd965607c2144031479456, vars: {}, profile: , target: , version: 1.8.3
+[0m17:09:04.478443 [info ] [MainThread]: Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m17:09:04.479017 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '090eda49-b4fc-4ceb-bb12-6d33d79ae80b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f60483678e0>]}
+[0m17:09:06.402400 [warn ] [MainThread]: [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 1 unused configuration paths:
+- sources.pokemon
+[0m17:09:06.419011 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '090eda49-b4fc-4ceb-bb12-6d33d79ae80b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6046fc8610>]}
+[0m17:09:06.666657 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '090eda49-b4fc-4ceb-bb12-6d33d79ae80b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f60470a0ac0>]}
+[0m17:09:06.667445 [info ] [MainThread]: Found 2 models, 1 test, 1 seed, 1 source, 447 macros
+[0m17:09:06.667961 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '090eda49-b4fc-4ceb-bb12-6d33d79ae80b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6046fb91f0>]}
+[0m17:09:06.669937 [info ] [MainThread]: 
+[0m17:09:06.670748 [debug] [MainThread]: Acquiring new snowflake connection 'master'
+[0m17:09:06.676888 [debug] [ThreadPool]: Acquiring new snowflake connection 'list_RAW'
+[0m17:09:06.695052 [debug] [ThreadPool]: Using snowflake connection "list_RAW"
+[0m17:09:06.695655 [debug] [ThreadPool]: On list_RAW: /* {"app": "dbt", "dbt_version": "1.8.3", "profile_name": "my_profile", "target_name": "dev", "connection_name": "list_RAW"} */
+show terse schemas in database RAW
+    limit 10000
+[0m17:09:06.696070 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m17:09:07.208172 [debug] [ThreadPool]: SQL status: SUCCESS 3 in 0.512 seconds
+[0m17:09:07.210426 [debug] [ThreadPool]: On list_RAW: Close
+[0m17:09:07.297447 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_RAW, now list_RAW_POKEMON)
+[0m17:09:07.310584 [debug] [ThreadPool]: Using snowflake connection "list_RAW_POKEMON"
+[0m17:09:07.311182 [debug] [ThreadPool]: On list_RAW_POKEMON: /* {"app": "dbt", "dbt_version": "1.8.3", "profile_name": "my_profile", "target_name": "dev", "connection_name": "list_RAW_POKEMON"} */
+show objects in RAW.POKEMON limit 10000
+[0m17:09:07.311604 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m17:09:07.792628 [debug] [ThreadPool]: SQL status: SUCCESS 1 in 0.481 seconds
+[0m17:09:07.794974 [debug] [ThreadPool]: On list_RAW_POKEMON: Close
+[0m17:09:07.906589 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '090eda49-b4fc-4ceb-bb12-6d33d79ae80b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f60472757f0>]}
+[0m17:09:07.907546 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m17:09:07.908055 [info ] [MainThread]: 
+[0m17:09:07.912611 [debug] [Thread-1  ]: Began running node model.DBT_DAG.stg_pokemon
+[0m17:09:07.913391 [info ] [Thread-1  ]: 1 of 2 START sql view model POKEMON.stg_pokemon ................................ [RUN]
+[0m17:09:07.914065 [debug] [Thread-1  ]: Re-using an available connection from the pool (formerly list_RAW_POKEMON, now model.DBT_DAG.stg_pokemon)
+[0m17:09:07.914641 [debug] [Thread-1  ]: Began compiling node model.DBT_DAG.stg_pokemon
+[0m17:09:07.926149 [debug] [Thread-1  ]: Writing injected SQL for node "model.DBT_DAG.stg_pokemon"
+[0m17:09:07.927152 [debug] [Thread-1  ]: Began executing node model.DBT_DAG.stg_pokemon
+[0m17:09:07.969568 [debug] [Thread-1  ]: Writing runtime sql for node "model.DBT_DAG.stg_pokemon"
+[0m17:09:07.971083 [debug] [Thread-1  ]: Using snowflake connection "model.DBT_DAG.stg_pokemon"
+[0m17:09:07.971671 [debug] [Thread-1  ]: On model.DBT_DAG.stg_pokemon: /* {"app": "dbt", "dbt_version": "1.8.3", "profile_name": "my_profile", "target_name": "dev", "node_id": "model.DBT_DAG.stg_pokemon"} */
+create or replace   view RAW.POKEMON.stg_pokemon
+  
+   as (
+    -- models/staging/stg_pokemon.sql
+
+-- Define staging model for Pokemon data
+with pokemon as (
+    select
+        id,
+        name,
+        base_experience,
+        height,
+        weight
+    from RAW.pokemon.pokemon
+)
+
+select * from pokemon
+  );
+[0m17:09:07.972136 [debug] [Thread-1  ]: Opening a new connection, currently in state closed
+[0m17:09:08.477470 [debug] [Thread-1  ]: SQL status: SUCCESS 1 in 0.505 seconds
+[0m17:09:08.507224 [debug] [Thread-1  ]: On model.DBT_DAG.stg_pokemon: Close
+[0m17:09:08.604777 [debug] [Thread-1  ]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '090eda49-b4fc-4ceb-bb12-6d33d79ae80b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6047177610>]}
+[0m17:09:08.605877 [info ] [Thread-1  ]: 1 of 2 OK created sql view model POKEMON.stg_pokemon ........................... [[32mSUCCESS 1[0m in 0.69s]
+[0m17:09:08.606783 [debug] [Thread-1  ]: Finished running node model.DBT_DAG.stg_pokemon
+[0m17:09:08.608234 [debug] [Thread-1  ]: Began running node model.DBT_DAG.core_pokemon
+[0m17:09:08.608952 [info ] [Thread-1  ]: 2 of 2 START sql table model POKEMON.core_pokemon .............................. [RUN]
+[0m17:09:08.609644 [debug] [Thread-1  ]: Re-using an available connection from the pool (formerly model.DBT_DAG.stg_pokemon, now model.DBT_DAG.core_pokemon)
+[0m17:09:08.610169 [debug] [Thread-1  ]: Began compiling node model.DBT_DAG.core_pokemon
+[0m17:09:08.614571 [debug] [Thread-1  ]: Writing injected SQL for node "model.DBT_DAG.core_pokemon"
+[0m17:09:08.615356 [debug] [Thread-1  ]: Began executing node model.DBT_DAG.core_pokemon
+[0m17:09:08.643647 [debug] [Thread-1  ]: Writing runtime sql for node "model.DBT_DAG.core_pokemon"
+[0m17:09:08.645058 [debug] [Thread-1  ]: Using snowflake connection "model.DBT_DAG.core_pokemon"
+[0m17:09:08.645628 [debug] [Thread-1  ]: On model.DBT_DAG.core_pokemon: /* {"app": "dbt", "dbt_version": "1.8.3", "profile_name": "my_profile", "target_name": "dev", "node_id": "model.DBT_DAG.core_pokemon"} */
+create or replace transient table RAW.POKEMON.core_pokemon
+         as
+        (-- models/marts/core_pokemon.sql
+
+-- Define core model for processed Pokemon data
+with stg_pokemon as (
+    select * from RAW.POKEMON.stg_pokemon
+)
+
+select
+    id,
+    name,
+    base_experience,
+    height,
+    weight
+from stg_pokemon
+        );
+[0m17:09:08.646133 [debug] [Thread-1  ]: Opening a new connection, currently in state closed
+[0m17:09:09.666238 [debug] [Thread-1  ]: SQL status: SUCCESS 1 in 1.020 seconds
+[0m17:09:09.668844 [debug] [Thread-1  ]: On model.DBT_DAG.core_pokemon: Close
+[0m17:09:09.756095 [debug] [Thread-1  ]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '090eda49-b4fc-4ceb-bb12-6d33d79ae80b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6046ee88b0>]}
+[0m17:09:09.757143 [info ] [Thread-1  ]: 2 of 2 OK created sql table model POKEMON.core_pokemon ......................... [[32mSUCCESS 1[0m in 1.15s]
+[0m17:09:09.757966 [debug] [Thread-1  ]: Finished running node model.DBT_DAG.core_pokemon
+[0m17:09:09.759704 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m17:09:09.760131 [debug] [MainThread]: Connection 'model.DBT_DAG.core_pokemon' was properly closed.
+[0m17:09:09.760569 [info ] [MainThread]: 
+[0m17:09:09.761028 [info ] [MainThread]: Finished running 1 view model, 1 table model in 0 hours 0 minutes and 3.09 seconds (3.09s).
+[0m17:09:09.762114 [debug] [MainThread]: Command end result
+[0m17:09:09.802207 [info ] [MainThread]: 
+[0m17:09:09.802926 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m17:09:09.803378 [info ] [MainThread]: 
+[0m17:09:09.803822 [info ] [MainThread]: Done. PASS=2 WARN=0 ERROR=0 SKIP=0 TOTAL=2
+[0m17:09:09.804865 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": true, "command_wall_clock_time": 5.896552, "process_user_time": 4.52159, "process_kernel_time": 0.240338, "process_mem_max_rss": "130792", "process_in_blocks": "352", "process_out_blocks": "2736"}
+[0m17:09:09.805669 [debug] [MainThread]: Command `dbt run` succeeded at 17:09:09.805519 after 5.90 seconds
+[0m17:09:09.806255 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f604b3a3c40>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f604a67f1c0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6047063130>]}
+[0m17:09:09.806786 [debug] [MainThread]: Flushing usage events

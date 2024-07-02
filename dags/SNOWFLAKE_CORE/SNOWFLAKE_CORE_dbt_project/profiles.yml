@@ -1,0 +1,10 @@
+my_profile:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: ip94038.us-east4.gcp
+      user: jacksongeorgetown
+      password: Dataiku0531*$
+      database: RAW
+      schema: POKEMON

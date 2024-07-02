@@ -57,7 +57,7 @@ ln "$EXTERNAL_DAGS_DIR/$DAG_NAME/requirements.txt" "$AIRFLOW_HOME/dags/requireme
 sed -i "s/<PLACEHOLDER_NAME_HERE>/$DAG_NAME/g" "$DBT_PROJECT_DIR/dbt_project.yml"
 
 # Copy the template DAG to the external DAG folder
-cp "$CURRENT_DIR/template_folder/configuration.yaml" "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_configuration.yaml"
+cp "$CURRENT_DIR/template_dbt/configuration.yaml" "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_configuration.yaml"
 
 cp "$CURRENT_DIR/template_dbt/template_dbt_dag.py" "$EXTERNAL_DAGS_DIR/$DAG_NAME/${DAG_NAME}_dag.py"
 
@@ -193,3 +193,4 @@ echo "DAG $DAG_NAME activated."
 # # Unpause the DAG
 # airflow dags unpause "$DAG_NAME"
 # echo "DAG $DAG_NAME activated."
+

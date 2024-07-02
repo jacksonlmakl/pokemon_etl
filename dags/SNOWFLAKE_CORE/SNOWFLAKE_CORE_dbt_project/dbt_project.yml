@@ -1,0 +1,22 @@
+version: 2
+
+name: 'DBT_DAG'
+version: '1.0.0'
+profile: 'my_profile'
+
+source-paths: ["models"]  # Directory containing source YAML files
+test-paths: ["tests"]  # Directory for test files
+data-paths: ["seeds"]  # Directory for seed files (if any)
+macro-paths: ["macros"]  # Directory for macro files
+docs-paths: ["docs"]  # Directory for documentation files
+
+models:
+  DBT_DAG:
+    staging:
+      +materialized: view  # Materialization type for staging models (e.g., view)
+    marts:
+      +materialized: table  # Materialization type for mart models (e.g., table)
+
+sources:
+  pokemon:
+    +enabled: true

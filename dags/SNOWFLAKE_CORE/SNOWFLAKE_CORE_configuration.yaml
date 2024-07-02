@@ -1,0 +1,6 @@
+start_date_year: 2024
+start_month_year: 07
+start_day_year: 02
+retries: 1
+retry_delay: 5
+schedule_interval: '@daily'

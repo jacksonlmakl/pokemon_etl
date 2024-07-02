@@ -1,0 +1,11 @@
+name: "SNOWFLAKE_RAW"
+start_date_year: 2024
+start_month_year: 1
+start_day_year: 1
+retries: 1
+retry_delay: 5
+schedule_interval: '@daily'
+
+python_scripts:
+  - "pokemon_raw.py"
+requirements_file: "requirements.txt"
