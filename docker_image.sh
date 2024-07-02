@@ -100,6 +100,7 @@ RUN cp -rf /opt/airflow/airflow_home/dags/ /opt/airflow/
 RUN rm -rf /opt/airflow/airflow_home
 
 COPY secrets.yaml /opt/airflow/dags/secrets.yaml
+COPY secrets.yaml /opt/airflow/secrets.yaml
 
 # Install python3-venv if it's not installed
 USER root
