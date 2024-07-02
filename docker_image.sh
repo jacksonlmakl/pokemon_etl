@@ -48,6 +48,10 @@ echo "Requirements have been saved to $OUTPUT_FILE"
 # Remove pkg_resources from requirements.txt if present
 sed -i "s/pkg_resources==0.0.0/ /g" $OUTPUT_FILE
 
+
+# tar -czvf airflow_home.tar.gz airflow_home
+tar --exclude='airflow_home/airflow_venv' --dereference -czvf airflow_home.tar.gz airflow_home
+
 # Create a Dockerfile if it doesn't exist
 cat <<EOF > Dockerfile
 # Use the official Airflow image with Python 3.8
@@ -58,22 +62,33 @@ ENV AIRFLOW_HOME=/opt/airflow
 ENV PIP_USER=false
 ENV HOME=/root
 
+USER airflow
 # Create necessary directories and set permissions
-USER root
-RUN mkdir -p /opt/airflow/logs /opt/airflow/dags && \
-    chown -R airflow: /opt/airflow
+# USER root
+# RUN mkdir -p /opt/airflow/logs /opt/airflow/dags && \
+#     chown -R airflow: /opt/airflow
 
 # Copy everything from the current directory to the working directory in the Docker image
-COPY . /opt/airflow/
-
+# COPY . /opt/airflow/
+# Copy the tarball into the Docker image
+COPY requirements.txt /opt/airflow/requirements.txt
+COPY airflow_home.tar.gz /opt/airflow/
+COPY entry_point.sh  /opt/airflow/
 # Ensure entry_point.sh is executable
+USER root
 RUN chmod +x /opt/airflow/entry_point.sh
+USER airflow
 
+RUN tar -xzvf /opt/airflow/airflow_home.tar.gz -C /opt/airflow && rm /opt/airflow/airflow_home.tar.gz
+RUN rm -rf /opt/airflow/dags
+RUN cp -rf /opt/airflow/airflow_home/dags/ /opt/airflow/
+RUN rm -rf /opt/airflow/airflow_home
 # Install python3-venv if it's not installed
+USER root
 RUN apt-get update && apt-get install -y python3-venv
 
 # Switch to the airflow user
-USER airflow
+# USER airflow
 
 # Create the virtual environment
 RUN python3 -m venv /opt/airflow/airflow_venv
@@ -107,6 +122,7 @@ exit 0
 
 
 
+
 # #!/bin/bash
 
 # IMAGE_NAME=${1:-"jacksonmakl/data_flow_tool"}
@@ -117,7 +133,7 @@ exit 0
 # cd data_flow_tool
 
 # # Define the path to the virtual environment
-# VENV_DIR="airflow_venv"
+# VENV_DIR="airflow_home/airflow_venv"
 
 # # Define the output file for the requirements
 # OUTPUT_FILE="requirements.txt"
@@ -138,7 +154,7 @@ exit 0
 # chmod +x entry_point.sh
 
 # # Activate the virtual environment
-# sudo source "$VENV_DIR/bin/activate"
+# source "$VENV_DIR/bin/activate"
 
 # # Find every requirements.txt file in the dags directory and its subdirectories
 # find dags -name 'requirements.txt' | while read requirements_file; do
@@ -156,7 +172,7 @@ exit 0
 
 # # Remove pkg_resources from requirements.txt if present
 # sed -i "s/pkg_resources==0.0.0/ /g" $OUTPUT_FILE
-# sed -i "s/dbt-snowflake/ /g" "--no-cache-dir dbt-snowflake"
+
 # # Create a Dockerfile if it doesn't exist
 # cat <<EOF > Dockerfile
 # # Use the official Airflow image with Python 3.8
@@ -164,6 +180,8 @@ exit 0
 
 # # Set environment variables
 # ENV AIRFLOW_HOME=/opt/airflow
+# ENV PIP_USER=false
+# ENV HOME=/root
 
 # # Create necessary directories and set permissions
 # USER root
@@ -176,18 +194,20 @@ exit 0
 # # Ensure entry_point.sh is executable
 # RUN chmod +x /opt/airflow/entry_point.sh
 
+# # Install python3-venv if it's not installed
+# RUN apt-get update && apt-get install -y python3-venv
+
 # # Switch to the airflow user
 # USER airflow
 
-# # Install python3.8-venv if it's not installed
-# USER root
-# RUN python3 -m venv "/opt/airflow/airflow_venv"
-# RUN source /opt/airflow/airflow_venv/bin/activate
+# # Create the virtual environment
+# RUN python3 -m venv /opt/airflow/airflow_venv
 
-# # Install dependencies directly as the airflow user
-# RUN pip3  install --upgrade pip && \
-#     pip3  install -r /opt/airflow/requirements.txt
-# USER airflow
+# # Upgrade pip and install dependencies
+# RUN /opt/airflow/airflow_venv/bin/pip install --upgrade pip
+# RUN /opt/airflow/airflow_venv/bin/pip install dbt dbt-snowflake
+# RUN /opt/airflow/airflow_venv/bin/pip install -r /opt/airflow/requirements.txt
+
 # # Set the working directory
 # WORKDIR /opt/airflow
 
@@ -200,5 +220,10 @@ exit 0
 
 # # Stop and remove any existing container with the same name
 # sudo docker rm -f $CONTAINER_NAME || true
+
+# # Run the new container
+# # sudo docker run -d --name $CONTAINER_NAME $IMAGE_NAME:$IMAGE_VERSION
+
 # echo "Docker Image Built Successfully"
 # exit 0
+
